@@ -3,7 +3,7 @@ import { Container } from "./styled"
 export function Home() {
     return (
         <Container>
-            Home
+            <h1>Testando titulo</h1>
         </Container>
     )
 }
