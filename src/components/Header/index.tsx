@@ -1,7 +1,39 @@
+import { Link } from "react-router-dom"
+import { Container } from "./styled"
+
+import { SingInButton } from "../SingInButton"
+
 export function Header(){
     return(
-        <header>
-            Meu menu
-        </header>
+        <Container>
+            <div className="wrapper">
+                <div className="left-side">
+                    <Link to="/">
+                        <h1>CONEXÃO</h1>   
+                    </Link>
+                </div>
+
+                <div className="center">
+                    <nav>
+                        <ul>
+                            <li>
+                                <Link to="">
+                                    Home
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="">
+                                    Saiba mais
+                                </Link>
+                            </li>
+                        </ul>    
+                    </nav>    
+                </div>
+
+                <div className="right-side">
+                    <SingInButton/>
+                </div>
+            </div>
+        </Container>
     )
 }
