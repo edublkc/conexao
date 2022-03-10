@@ -12,11 +12,11 @@ export const GlobalStyle = createGlobalStyle`
 
     body{
         font-family:'Poppins',sans-serif;
-        background-color:${themes.dark.bg}; 
+        background-color:${themes.colors.bg}; 
     }
 
     body,a,input,button{
-        color:${themes.dark.text} ;
+        color:${themes.colors.text} ;
        
     }
 

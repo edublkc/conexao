@@ -1,9 +1,8 @@
 import { Container } from "./styled"
-
-export function SingInButton() {
+export function SignupButton() {
     return (
         <Container>
-            Entrar
+            Cadastre-se
         </Container>
     )
 }

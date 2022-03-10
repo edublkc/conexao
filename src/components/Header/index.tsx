@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import { Container } from "./styled"
 
 import { SingInButton } from "../SingInButton"
+import { SignupButton } from "../SignupButton"
 
 export function Header(){
     return(
@@ -17,7 +18,7 @@ export function Header(){
                     <nav>
                         <ul>
                             <li>
-                                <Link to="">
+                                <Link className="active" to="">
                                     Home
                                 </Link>
                             </li>
@@ -32,6 +33,7 @@ export function Header(){
 
                 <div className="right-side">
                     <SingInButton/>
+                    <SignupButton/>
                 </div>
             </div>
         </Container>

@@ -1,8 +1,14 @@
 export const themes = {
-    dark: {
+    colors: {
         bg: "#121212",
         text: '#fff',
-        lightBlue400: '#00B0FF',
-        gray800: '#424242'
+        pink: {
+            '500': '#E91E63',
+            'A100': '#FF80AB',
+            'A400': '#F50057'
+        },
+        blueGray: {
+            '100': '#CFD8DC'
+        }
     }
 }
