@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 
 import { Home } from "../pages/Home";
-import { Outros } from "../pages/Outros";
+import { Singup } from "../pages/Singup";
 
 import { RouteHandler } from "./RouteHandler";
 
@@ -14,9 +14,9 @@ export function RouterConfig() {
                     <Home />
                 </RouteHandler>
             } />
-            <Route path="/outros" element={
-                <RouteHandler auth={false}>
-                    <Outros />
+            <Route path="/singup" element={
+                <RouteHandler >
+                    <Singup />
                 </RouteHandler>
             } />
         </Routes>

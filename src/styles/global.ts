@@ -15,9 +15,14 @@ export const GlobalStyle = createGlobalStyle`
         background-color:${themes.colors.bg}; 
     }
 
-    body,a,input,button{
+    body,a,button{
         color:${themes.colors.text} ;
        
+    }
+
+    input{
+        border: 0;
+        outline: 0;
     }
 
     a{

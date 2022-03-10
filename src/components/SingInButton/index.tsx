@@ -1,9 +1,12 @@
+import { Link } from "react-router-dom"
 import { Container } from "./styled"
 
 export function SingInButton() {
     return (
         <Container>
-            Entrar
+            <Link to="/singup">
+                Entrar
+            </Link>
         </Container>
     )
 }
