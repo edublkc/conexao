@@ -1,14 +1,18 @@
 import { BrowserRouter } from 'react-router-dom';
 import { GlobalStyle } from './styles/global';
-import { RouterConfig } from './Routes/Routes';
+import { RouterConfig } from './routes/Routes';
+import { FirebaseAuthProvider } from './context/firebaseAuthContext';
 
 
 function App() {
   return (
-    <BrowserRouter>
-      <RouterConfig />
-      <GlobalStyle />
-    </BrowserRouter>
+    <FirebaseAuthProvider>
+      <BrowserRouter>
+        <RouterConfig />
+        <GlobalStyle />
+      </BrowserRouter>
+    </FirebaseAuthProvider>
+
   );
 }
 

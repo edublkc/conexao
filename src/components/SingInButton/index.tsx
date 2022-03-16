@@ -4,7 +4,7 @@ import { Container } from "./styled"
 export function SingInButton() {
     return (
         <Container>
-            <Link to="/singup">
+            <Link to="/singin">
                 Entrar
             </Link>
         </Container>

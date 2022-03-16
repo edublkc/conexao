@@ -37,6 +37,10 @@ export const Container = styled.div`
         display: flex;
         align-items: center;
 
+        .forgetPass{
+            font-size:0.75rem;
+        }
+        
         .formcontainer{
             max-width: 490px;
             margin: 0 auto;

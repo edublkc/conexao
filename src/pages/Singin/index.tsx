@@ -1,27 +1,26 @@
-import womanDraw from "../../assets/woman.svg"
-
-import { FormInput } from "../../components/FormInputs/styled";
-import { Container } from "./styled";
-
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from "yup";
 
 import { authenticateUser, createUser, logout } from "../../services/firebase/firebaseAuthConfig";
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { useEffect, useState } from "react";
-import { Link,useNavigate } from "react-router-dom";
+import { Container } from "./styled";
+import womanDraw from "../../assets/woman.svg"
 
-import { css } from "@emotion/react";
+import { FormInput } from "../../components/FormInputs/styled";
+
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
+
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
+
+
 import SyncLoader from "react-spinners/SyncLoader";
 
 interface handleSingUpProps {
-    name: string
     email: string
     password: string
-    password_confirmation: string
 }
 
 interface Errors {
@@ -29,16 +28,14 @@ interface Errors {
 }
 
 const schema = yup.object({
-    name: yup.string().required('este campo é obrigatório'),
     email: yup.string().email('digite um email válido').required('este campo é obrigatório'),
-    password: yup.string().required('este campo é obrigatório').min(8, 'a senha deve ter no mínimo 8 dígitos'),
-    password_confirmation: yup.string().oneOf([null, yup.ref('password')], 'a confirmação de senha não está correta')
-
+    password: yup.string().required('este campo é obrigatório').min(8, ''),
 })
 
-export function Singup() {
+export function Singin() {
     const [errorMessage, setErrorMessage] = useState('')
-    const [isLoading,setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
+
 
     useEffect(()=>{
         logout()
@@ -46,41 +43,42 @@ export function Singup() {
 
     const navigate = useNavigate()
 
-    const { register, handleSubmit, formState: { errors }} = useForm<handleSingUpProps>({
+    const { register, handleSubmit, formState: { errors } } = useForm<handleSingUpProps>({
         resolver: yupResolver(schema)
     })
 
-    const handleSingUp = async (values: handleSingUpProps) => {
+    const handleSingIn = async (values: handleSingUpProps) => {
         setIsLoading(true)
-
-        const newUser = await createUser(values.email, values.password)
-
+        const user = await authenticateUser(values.email,values.password)
         setIsLoading(false)
 
-
-        if (typeof newUser === "string") {
-            const error = JSON.parse(newUser)
-            notify(error)
+        if (typeof user === "string") {
+            const error = JSON.parse(user)
+            MessageErro(error)
         } else {
-            await authenticateUser(values.email,values.password)
-            navigate('/myaccount')
+            navigate('/')
         }
+
+        
 
     }
 
-    function notify(error: Errors) {
+    function MessageErro(error: Errors) {
+        setErrorMessage('')
+
         switch(error.code){
-            case 'auth/email-already-in-use':
-                setErrorMessage('O e-mail fornecido já está em uso por outro usuário.')
+            case "auth/wrong-password":
+                setErrorMessage('E-mail e/ou senha inválido')
             break;
-            case 'auth/error-invalid-email':
-                setErrorMessage('Digite um e-mail válido')
-            break;
-            case 'auth/error-weak-password':
-                setErrorMessage('Senha fraca')
+            case 'auth/user-not-found':
+                setErrorMessage('Usuário não encontrado')
             break;
         }
 
+        notify()
+    }
+
+    function notify(){
         toast.error(errorMessage, {
             position: "top-right",
             autoClose: 5000,
@@ -89,7 +87,7 @@ export function Singup() {
             pauseOnHover: false,
             draggable: true,
             progress: undefined,
-            });
+        });
     }
 
     return (
@@ -121,30 +119,25 @@ export function Singup() {
 
                     <div className="title">
                         <div className="hasAccount">
-                            <span>Você já tem uma conta? Então <Link to="/singin">faça o login</Link></span>
+                            <span>Ainda não tem conta? Então <Link to="/singup">faça seu cadastro</Link></span>
                         </div>
-                        <h1>Crie sua conta grátis!</h1>
-                        <h3>Preencha todos os campos.</h3>
+                        <h1>Seja bem-vindo</h1>
+                        <h3>Digite seu e-mail e senha para entrar:</h3>
                     </div>
 
 
-                    <form onSubmit={handleSubmit(handleSingUp)}>
-
-                        <FormInput label="Nome: " placeholder="Nome completo" type="text" error={errors.name} disabled={isLoading} {...register('name')} />
-
+                    <form onSubmit={handleSubmit(handleSingIn)}>
                         <FormInput label="E-mail: " placeholder="E-mail" type="text" error={errors.email} disabled={isLoading} {...register('email')} />
-
                         <FormInput label="Senha: " placeholder="Senha" type="password" error={errors.password} disabled={isLoading} {...register('password')} />
 
-                        <FormInput label="Confirmar senha: " placeholder="Confirme sua senha" type="password" disabled={isLoading} error={errors.password_confirmation} {...register('password_confirmation')} />
 
 
                         <button type="submit" disabled={isLoading}>
                             {isLoading && <SyncLoader color={'#fff'} loading={isLoading} size={5} />}
-                            {!isLoading && 'Cadastrar'}
+                            {!isLoading && 'Entrar'}
                         </button>
                     </form>
-
+                    <Link className="forgetPass" to="/">Esqueci minha senha</Link>
                 </div>
             </div>
         </Container>
