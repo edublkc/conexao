@@ -4,6 +4,8 @@ export const themes = {
         text: '#fff',
         error: "#D50000",
         pink: {
+            '50': '#FCE4EC',
+            '200':'#F48FB1',
             '500': '#E91E63',
             'A100': '#FF80AB',
             'A400': '#F50057'

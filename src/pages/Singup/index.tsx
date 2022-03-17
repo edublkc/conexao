@@ -63,7 +63,7 @@ export function Singup() {
             notify(error)
         } else {
             await authenticateUser(values.email,values.password)
-            navigate('/myaccount')
+            navigate('/myaccount/platforms')
         }
 
     }

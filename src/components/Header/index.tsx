@@ -1,16 +1,27 @@
-import { Link } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
+
+import { useContext } from "react"
+import { firebaseAuthContext } from "../../context/firebaseAuthContext"
+
 import { Container } from "./styled"
 
 import { SingInButton } from "../SingInButton"
 import { SignupButton } from "../SignupButton"
+import { MyAccountButton } from "../MyAccountButton"
 
-export function Header(){
-    return(
+import { SyncLoader } from "react-spinners"
+import { SignoutButton } from "../SingoutButton"
+
+
+export function Header() {
+    const { authenticated, loadingInformations } = useContext(firebaseAuthContext)
+
+    return (
         <Container>
             <div className="wrapper">
                 <div className="left-side">
                     <Link to="/">
-                        <h1>CONEXÃO</h1>   
+                        <h1>CONEXÃO</h1>
                     </Link>
                 </div>
 
@@ -18,22 +29,38 @@ export function Header(){
                     <nav>
                         <ul>
                             <li>
-                                <Link className="active" to="">
+                                <NavLink to="/">
                                     Home
-                                </Link>
+                                </NavLink>
                             </li>
                             <li>
-                                <Link to="">
+                                <NavLink to="/more">
                                     Saiba mais
-                                </Link>
+                                </NavLink>
                             </li>
-                        </ul>    
-                    </nav>    
+                        </ul>
+                    </nav>
                 </div>
 
+
                 <div className="right-side">
-                    <SingInButton/>
-                    <SignupButton/>
+
+                    {loadingInformations && <SyncLoader color={'#fff'} loading={loadingInformations} size={5} />}
+
+                    {!loadingInformations && authenticated &&
+                        <>
+                            <MyAccountButton />
+                            <SignoutButton />
+                        </>
+                    }
+
+                    {!loadingInformations && !authenticated &&
+                        <>
+                            <SingInButton />
+                            <SignupButton />
+                        </>
+                    }
+
                 </div>
             </div>
         </Container>

@@ -56,7 +56,7 @@ export function Singin() {
             const error = JSON.parse(user)
             MessageErro(error)
         } else {
-            navigate('/')
+            navigate('/myaccount/platforms')
         }
 
         
