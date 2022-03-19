@@ -57,33 +57,7 @@ export function Youtube() {
           liveStreamRecorder.start(1000)
       }
 
-   const authenticate = () =>  {
-    return (window.gapi as any).auth2?.getAuthInstance()?.signIn({ scope: "https://www.googleapis.com/auth/youtube.force-ssl" }).then((res: any) => {
-        console.log(res)
-      })
-   }
-    
-    function loadClient(){
-        (window.gapi as any).client?.setApiKey("AIzaSyA5WZMScvIE7yFXCQ4Y41EAteDZ1cfAqQE")
-        return (window.gapi as any).client?.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
-            .then((res: any)=>{
-                console.log(res)
-            })
-               
-    }
-    function execute() {
-        return (window.gapi as any).client.youtube.liveBroadcasts.insert({
-          "resource": {}
-        })
-            .then(function(response: any) {
-                    // Handle the results here (response.result has the parsed body).
-                    console.log("Response", response);
-                  },
-                  function(err: any) { console.error("Execute error", err); });
-      }
-      (window.gapi as any).load("client:auth2", function() {
-        (window.gapi as any).auth2.init({client_id: "930614894956-0hpnrca1fjg9a7ierak837n8ih331ojo.apps.googleusercontent.com"});
-      });
+   
 
       console.log((window.gapi as any))
 
@@ -93,7 +67,7 @@ export function Youtube() {
           part: ['id,snippet,contentDetails,status'],
           resource: {
             snippet: {
-              title: `New Video: ${new Date().toISOString()}`,
+              title: `New Video: ${new Date().toLocaleDateString('pt-BR',{'day':'2-digit',month:'2-digit',year:'numeric'})}`,
               scheduledStartTime: `${new Date().toISOString()}`,
               description:
                 'A description of your video stream. This field is optional.',
@@ -101,13 +75,13 @@ export function Youtube() {
             contentDetails: {
               recordFromStart: true,
               // startWithSlate: true,
-              enableAutoStart: false,
+              enableAutoStart: true,
               monitorStream: {
                 enableMonitorStream: false,
               },
             },
             status: {
-              privacyStatus: 'public',
+              privacyStatus: 'private',
               selfDeclaredMadeForKids: true,
             },
           },
@@ -214,42 +188,18 @@ export function Youtube() {
         
         <div>
             
-            <button style={{ backgroundColor: '#ccc' }} onClick={() => authenticate().then(loadClient)}>autenticar</button>
+            
                     <br />
                     <button style={{ backgroundColor: '#ccc' }} onClick={()=> handleCreateBroadcast()}>Criar broadcast</button>
                     <br />
                     <button style={{ backgroundColor: '#ccc' }} onClick={handleCreateStream}>Criar stream</button>
                     <br />
-                    <button style={{ backgroundColor: '#ccc' }} onClick={handleCreateStream}>Bind stream</button>
+                    <button style={{ backgroundColor: '#ccc' }} onClick={handlebindBroadcast}>Bind stream</button>
                     <br />
                     <button style={{ backgroundColor: '#ccc' }} onClick={startStream}>GO LIVE</button>
                     <br />
                     <button style={{ backgroundColor: '#ccc' }} onClick={handleLive}>Transition live</button>
                     <br />
-            
-         {/*{showloginButton ?
-                <GoogleLogin
-                    clientId={clientId}
-                    buttonText="Sign In"
-                    onSuccess={onLoginSuccess}
-                    onFailure={onLoginFailure}
-                    cookiePolicy={'single_host_origin'}
-                    isSignedIn={true}
-                    scope="https://www.googleapis.com/auth/youtube.force-ssl"
-                /> : null}
-
-            {showlogoutButton ?
-                <>
-                    
-                    <GoogleLogout
-                        clientId={clientId}
-                        buttonText="Sign Out"
-                        onLogoutSuccess={onSignoutSuccess}
-                    >
-                    </GoogleLogout>
-
-                </> : null
-            }*/}
         </div>
     )
 }

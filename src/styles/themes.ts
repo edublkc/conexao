@@ -12,6 +12,9 @@ export const themes = {
         },
         blueGray: {
             '100': '#CFD8DC'
+        },
+        platforms:{
+            youtube: '#c4302b'
         }
     }
 }

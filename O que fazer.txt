@@ -1,0 +1,39 @@
+1) authenticate the user [x]
+2) create a broadcast [x]
+3) create a stream 
+4) bind the stream to the broadcast
+5) send your video to a server which encodes the video and sends it to youtube "GO LIVE" 
+6) transition the broadcast status to live.
+
+api key = AIzaSyA5WZMScvIE7yFXCQ4Y41EAteDZ1cfAqQE
+
+
+   axios.post(`https://www.googleapis.com/youtube/v3/liveStreams?part=snippet%2Ccdn%2Cid%2CcontentDetails%2Cstatus&access_token=${userAuth.accessToken}`,
+        {
+            "snippet": {
+                'title': `New Video: ${new Date().toISOString()}`,
+                'scheduledStartTime': `${new Date().toISOString()}`,
+                'description': 'Testando minha livestream'
+          },
+          'cdn': {
+            'frameRate': 'variable',
+            'ingestionType': 'rtmp',
+            'resolution': 'variable',
+            'format': ''
+          },
+          'contentDetails': {
+            'recordFromStart': true,
+            'enableAutoStart': false,
+            'monitorStream': {
+              'enableMonitorStream': false,
+            },
+            'status': {
+                'privacyStatus': 'public',
+                'selfDeclaredMadeForKids': true,
+              },
+          },
+        })
+        .then((response) =>{
+                 console.log(response.data)
+                 setBroadcast(response)
+             })

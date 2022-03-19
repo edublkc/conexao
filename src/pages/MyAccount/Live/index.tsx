@@ -15,7 +15,8 @@ export function Live() {
 
 
                 <Content>
-                   AO VIVO
+                   <h1>AO VIVO</h1>
+                   <button type="button">Criar transmissão</button>
                 </Content>
             </Wrapper>
 

@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 
 import { Home } from "../pages/Home";
+import { AllPlatforms } from "../pages/MyAccount/AllPlatforms";
 import { Live } from "../pages/MyAccount/Live";
 import { Platforms } from "../pages/MyAccount/Platforms";
 import { Singin } from "../pages/Singin";
@@ -23,6 +24,13 @@ export function RouterConfig() {
                 </AuthRoute>
             } />
 
+            <Route path="/myaccount/platforms/allplatforms" element={
+                <AuthRoute>
+                    <AllPlatforms />
+                </AuthRoute>
+            } />
+
+
             <Route path="/myaccount/live" element={
                 <AuthRoute>
                     <Live />
@@ -31,3 +39,5 @@ export function RouterConfig() {
         </Routes>
     )
 }
+
+
