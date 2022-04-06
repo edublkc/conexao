@@ -9,7 +9,7 @@ export const Container = styled.button`
     justify-content:center;
     gap: 0.5rem;
 
-    background-color:#9147FF;
+    background-color:${themes.colors.platforms.twitch};
 
     border-radius: 0.3125rem;
     padding:0.5rem 0.625rem;

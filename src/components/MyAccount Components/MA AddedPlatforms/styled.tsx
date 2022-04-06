@@ -30,7 +30,7 @@ export const Container = styled.div`
         font-size: 0.75rem;
 
         .platform{
-            color: ${themes.colors.platforms.youtube};
+            color: ${themes.colors.platforms.Youtube};
         }
     }
 

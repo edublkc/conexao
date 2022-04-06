@@ -14,7 +14,8 @@ export const themes = {
             '100': '#CFD8DC'
         },
         platforms:{
-            youtube: '#c4302b'
+            'Youtube': '#c4302b',
+            twitch: '#9147FF'
         }
     }
 }

@@ -12,6 +12,24 @@ export const Wrapper = styled.div`
 `
 
 export const Content = styled.main`
-    padding: 1rem;
+    width: 100%;
+   max-width: 900px;
+
+   .top{
+       display: flex;
+       align-items: center;
+       justify-content: space-between;
+   }
+
+   section{
+       margin-top: 2rem;
+
+       h3{
+           margin-bottom: 0.625rem;
+           font-weight: normal;
+           color: #686666;
+       }
+    }
+
 `
 

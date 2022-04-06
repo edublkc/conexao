@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, useParams} from "react-router-dom"
 
 import { useContext } from "react"
 import { firebaseAuthContext } from "../../../context/firebaseAuthContext"
@@ -8,11 +8,14 @@ import { Container } from "./styled"
 import { SignoutButton } from "../../SingoutButton"
 
 import { SyncLoader } from "react-spinners"
+import { StartStreamButton } from "../../Studio Components/StartStreamButton"
 
 
 
 export function MAHeader() {
     const { authenticated, loadingInformations } = useContext(firebaseAuthContext)
+    const pathName = window.location.pathname
+    const currentPageIsStudio = pathName.includes('studio')
 
     return (
         <Container>
@@ -28,11 +31,8 @@ export function MAHeader() {
 
                 <div className="right-side">
                     {loadingInformations && <SyncLoader color={'#fff'} loading={loadingInformations} size={5} />}
-                    {!loadingInformations && authenticated &&
-                        <>
-                            <SignoutButton />
-                        </>
-                        }
+                    {!loadingInformations && authenticated && !currentPageIsStudio && <SignoutButton />}
+                    {!loadingInformations && authenticated && currentPageIsStudio && <StartStreamButton />}
                 </div>
             </div>
         </Container>

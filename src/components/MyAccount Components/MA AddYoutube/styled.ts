@@ -9,7 +9,7 @@ export const Container = styled.button`
     justify-content:center;
     gap: 0.5rem;
 
-    background-color:${themes.colors.platforms.youtube};
+    background-color:${themes.colors.platforms.Youtube};
 
     border-radius: 0.3125rem;
     padding:0.5rem 0.625rem;
