@@ -154,23 +154,25 @@ export function MainScreen() {
 
             //Draw Name
             canvasContext.fillStyle = themes.colors.pink[500]
-            canvasContext.fillRect(0, canvasRef.current.height - 75, canvasContext?.measureText(displayName).width + 15, 30);
+            canvasContext.fillRect(0, canvasRef.current.height - 75, canvasContext?.measureText(displayName).width + 43, 30);
 
             canvasContext.font = "16px Poppins";
             canvasContext.fillStyle = "#fff";
             canvasContext.fillText(displayName, 5, canvasRef.current.height - 58)
 
             //Draw Message
-            canvasContext.fillStyle = '#fff'
-            canvasContext.fillRect(0, canvasRef.current.height - 50, canvasContext.measureText(displayMessage).width + 15 , 50);
             
-            canvasContext.font = "13px Poppins";
-            canvasContext.fillStyle = "#121212";
 
             const lines = []
 
 
-            if(displayMessage.length > 99){
+            if(displayMessage.length > 95){
+                canvasContext.fillStyle = '#fff'
+                canvasContext.fillRect(0, canvasRef.current.height - 50, canvasContext.measureText(displayMessage).width + 15 , 50);
+            
+                canvasContext.font = "13px Poppins";
+                canvasContext.fillStyle = "#121212";
+
                 const firstLine = displayMessage.substring(0,95)
                 const secondLine = displayMessage.substring(95)
                 lines.push(firstLine)
@@ -182,7 +184,13 @@ export function MainScreen() {
                     canvasContext.fillText(lines[i], 5, canvasRef.current.height - 30 + (i * lineheight));
                   }
             }else{
-                canvasContext.fillText(displayMessage, 5, canvasRef.current.height - 30);
+                canvasContext.fillStyle = '#fff'
+                canvasContext.fillRect(0, canvasRef.current.height - 50, canvasContext.measureText(displayMessage).width , 25);
+            
+                canvasContext.font = "13px Poppins";
+                canvasContext.fillStyle = "#121212";
+
+                canvasContext.fillText(displayMessage, 5, canvasRef.current.height - 32.5);
             }
         }
     }

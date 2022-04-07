@@ -1,6 +1,6 @@
 import { Container } from "./styled";
 import { useContext, useEffect, useState } from "react";
-import { isChatMessageSelected, useCanvasContext } from "../../../context/canvasContext";
+import {  useCanvasContext } from "../../../context/canvasContext";
 import { BroadcastInformationsContext } from "../../../context/broadcastInformationsContext";
 
 
@@ -39,6 +39,15 @@ export function Chat() {
         },
         snippet:{
             displayMessage: 'Etiam posuere quam ac quam. Maecenas aliquet accumsan leo. Nullam dapibus fermentum ipsum. Etiam quis quam. Integer lacinia. Nulla est. Nulla turpis magna, cursus sit amet, suscipit a, interdum id,fdf'
+        }
+    },{
+        etag: 'sdfsdfsdfsdghjghjsdfsfsdfs',
+        authorDetails: {
+            displayName: 'Cristiano Ronaldo CR7',
+            profileImageUrl: 'wwww'
+        },
+        snippet:{
+            displayMessage: 'Asenean placerat. In vulputate urna eu arcu. Aliquam erat volutpat. Suspendisse potenti. Morbi m'
         }
     }])
 
