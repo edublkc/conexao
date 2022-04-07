@@ -1,6 +1,6 @@
 import { Container } from "./styled";
-import { useContext, useState } from "react";
-import { PlatformsContext } from "../../../context/platformsContext";
+import { useContext, useEffect, useState } from "react";
+import { chatETag, isChatMessageSelected, PlatformsContext } from "../../../context/platformsContext";
 
 
 let nextPageToken: string
@@ -17,12 +17,38 @@ type ChatMessages = {
 }
 
 export function Chat() {
-    const { youtubeBroadcast } = useContext(PlatformsContext)
-    const [chatMessages, setChatMessages] = useState<ChatMessages[]>()
+    const {changeSelectedChatMessage} = useContext(PlatformsContext)
+
+    const [chatMessages, setChatMessages] = useState<ChatMessages[]>([{
+        etag: 'sdfsdfsdfsd',
+        authorDetails: {
+            displayName: 'Eduardo Mota',
+            profileImageUrl: 'wwww'
+        },
+        snippet:{
+            displayMessage: 'Manda um salve ai'
+        }
+    },{
+        etag: 'sdfsdfsdfsdghjghj',
+        authorDetails: {
+            displayName: 'Charles Chaplin',
+            profileImageUrl: 'wwww'
+        },
+        snippet:{
+            displayMessage: 'Etiam posuere quam ac quam. Maecenas aliquet accumsan leo. Nullam dapibus fermentum ipsum. Etiam quis quam. Integer lacinia. Nulla est. Nulla turpis magna, cursus sit amet, suscipit a, interdum id,fdf'
+        }
+    }])
+
+    const timerForUpdateChat = 1000 * 5 // 5 seconds
+
+    useEffect(()=>{
+        //const updateChatMessages = setInterval(execute,timerForUpdateChat)
+        console.log(isChatMessageSelected)
+    },[isChatMessageSelected])
 
     async function execute() {
         const reqChat = await (window.gapi as any)?.client.youtube.liveChatMessages.list({
-            "liveChatId": youtubeBroadcast.liveChatId,
+            "liveChatId": 'KicKGFVDT0l5SFRMSnNKb1BWSjJQRV9mbkFSdxILZUt4VVYyU3JXQms', //youtubeBroadcast.liveChatId,
             "part": [
                 "snippet,authorDetails",
 
@@ -34,15 +60,18 @@ export function Chat() {
         setChatMessages(resChat)
     }
 
-
+    const valor = false
 
     return (
         <Container>
-            
             {chatMessages && (
                 chatMessages.map((chat) => {
                     return (
-                        <div key={chat.etag} className="chat-box">
+                        <div 
+                        key={chat.etag} 
+                        className={`chat-box ${isChatMessageSelected ? 'active' : ''}`}
+                        onClick={() => changeSelectedChatMessage(chat.authorDetails.displayName,chat.snippet.displayMessage,chat.etag)}>
+
                             <div className="left-side">
                                 <img src={chat.authorDetails.profileImageUrl} />
                             </div>

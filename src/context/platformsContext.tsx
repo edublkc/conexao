@@ -25,6 +25,12 @@ interface Devices{
     camId: string
 }
 
+interface SelectedMessage{
+    displayName: string
+    displayMessage: string
+    isMessageSelected: boolean
+}
+
 type PlatformsContext = {
     platforms: Platform[]
     setPlatform: React.Dispatch<any>
@@ -40,9 +46,18 @@ type PlatformsContext = {
     setCanvasStream: React.Dispatch<any>
     audioStream: MediaStream
     setAudioStream: React.Dispatch<any>
+    selectedChatMessage: SelectedMessage
+    changeSelectedChatMessage: (name:string,message: string,etag:string) => void
+    setSelectedChatMessage: React.Dispatch<SelectedMessage>
 }
 
 export const PlatformsContext = createContext({} as PlatformsContext)
+
+
+export let chatETag: string
+export let displayMessage: string
+export let displayName: string
+export let isChatMessageSelected: boolean
 
 
 export function PlatformsContextProvider({children}: PlatformsContextProvider){
@@ -57,11 +72,33 @@ export function PlatformsContextProvider({children}: PlatformsContextProvider){
     const [nameToBeDisplayed,setNameToBeDisplayed] = useState('')
 
     const [canvasStream, setCanvasStream] = useState({} as MediaStream)
-    const [audioStream,setAudioStream] = useState({} as MediaStream)    
+    const [audioStream,setAudioStream] = useState({} as MediaStream)
+
+    const [selectedChatMessage,setSelectedChatMessage] = useState({
+            displayName: '',
+            displayMessage: '',
+            isMessageSelected: false
+    })
+
+    function changeSelectedChatMessage(name:string,message: string,etag: string){
+        console.log(etag)
+        if(chatETag === etag){
+            isChatMessageSelected = false
+            chatETag = ''
+            displayName = ''
+            displayMessage = ''
+        }else{
+            chatETag = etag
+            displayName = name
+            displayMessage = message
+            isChatMessageSelected = true
+        }
+        
+    }
 
 
     return(
-        <PlatformsContext.Provider value={{audioStream,setAudioStream,canvasStream,setCanvasStream,nameToBeDisplayed,setNameToBeDisplayed,devices,setDevices,platforms,setPlatform,broadcastInformations,setBroadcastInformations,youtubeBroadcast,setYoutubeBroadcast}}>
+        <PlatformsContext.Provider value={{setSelectedChatMessage,selectedChatMessage,changeSelectedChatMessage,audioStream,setAudioStream,canvasStream,setCanvasStream,nameToBeDisplayed,setNameToBeDisplayed,devices,setDevices,platforms,setPlatform,broadcastInformations,setBroadcastInformations,youtubeBroadcast,setYoutubeBroadcast}}>
             {children}
         </PlatformsContext.Provider>
     )

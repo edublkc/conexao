@@ -3,12 +3,13 @@ import { Container, MainVideo, Options, ScreenLayouts, Thumbs, Videos, Wrapp } f
 
 import { MdOutlineScreenShare } from "react-icons/md"
 import { BsCameraVideoFill, BsCameraVideoOffFill, BsMicFill, BsMicMuteFill } from "react-icons/bs"
-import { PlatformsContext } from "../../../context/platformsContext"
+import { isChatMessageSelected, PlatformsContext } from "../../../context/platformsContext"
 import { themes } from "../../../styles/themes"
 import { StartStreamButton } from "../StartStreamButton"
 import { SelectDevices } from "../SelectDevices"
 import { EditVideoSideBar } from "../EditVideoSideBar/SideBar"
 
+import {displayMessage, displayName} from "../../../context/platformsContext"
 
 let canvasContext: CanvasRenderingContext2D | null
 
@@ -27,7 +28,9 @@ export function MainScreen() {
         nameToBeDisplayed, 
         devices, 
         setCanvasStream: setCanvasStreamContext,
-        setAudioStream: setAudioStreamContext} = useContext(PlatformsContext)
+        setAudioStream: setAudioStreamContext,
+        selectedChatMessage} = useContext(PlatformsContext)
+
 
     const canvasRef = useRef<HTMLCanvasElement>({} as HTMLCanvasElement)
     const camRef = useRef<HTMLVideoElement>({} as HTMLVideoElement)
@@ -107,10 +110,12 @@ export function MainScreen() {
     }
 
     function drawInCanvas(video: any, ctx: CanvasRenderingContext2D | null, screen?: any) {
+        ctx?.clearRect(0,0,canvasRef.current.width,canvasRef.current.height)
 
         if (ctx) {
             ctx.fillStyle = 'rgb(10, 76, 199)'
         }
+
         ctx?.fillRect(0, 0, canvasRef.current.width, canvasRef.current.height)
         ctx?.drawImage(
             screen,
@@ -127,15 +132,62 @@ export function MainScreen() {
             cameraY1)
 
         if (canvasContext) {
-            canvasContext.fillStyle = themes.colors.pink[500]
-            canvasContext.fillRect(0, canvasRef.current.height - 40, canvasContext?.measureText(nameToBeDisplayed).width + 10, 30);
+            
+      
 
-            canvasContext.font = "20px Poppins";
-            canvasContext.fillStyle = "#fff";
-            canvasContext.fillText(nameToBeDisplayed, 5, canvasRef.current.height - 20)
+            if(isChatMessageSelected){
+                drawMessage()
+            }else{
+                canvasContext.fillStyle = themes.colors.pink[500]
+                canvasContext.fillRect(0, canvasRef.current.height - 40, canvasContext?.measureText(nameToBeDisplayed).width + 10, 30);
+    
+                canvasContext.font = "20px Poppins";
+                canvasContext.fillStyle = "#fff";
+                canvasContext.fillText(nameToBeDisplayed, 5, canvasRef.current.height - 20)
+            }
+            
         }
 
         setTimeout(drawInCanvas, 15, video, ctx, screen)
+    }
+
+    function drawMessage(){
+        if(canvasContext && displayMessage){
+        
+
+            //Draw Name
+            canvasContext.fillStyle = themes.colors.pink[500]
+            canvasContext.fillRect(0, canvasRef.current.height - 75, canvasContext?.measureText(displayName).width + 15, 30);
+
+            canvasContext.font = "16px Poppins";
+            canvasContext.fillStyle = "#fff";
+            canvasContext.fillText(displayName, 5, canvasRef.current.height - 58)
+
+            //Draw Message
+            canvasContext.fillStyle = '#fff'
+            canvasContext.fillRect(0, canvasRef.current.height - 50, canvasContext.measureText(displayMessage).width + 15 , 50);
+            
+            canvasContext.font = "13px Poppins";
+            canvasContext.fillStyle = "#121212";
+
+            const lines = []
+
+
+            if(displayMessage.length > 99){
+                const firstLine = displayMessage.substring(0,95)
+                const secondLine = displayMessage.substring(95)
+                lines.push(firstLine)
+                lines.push(secondLine)
+
+                const lineheight = 20
+
+                for (let i = 0; i < lines.length; i++) {
+                    canvasContext.fillText(lines[i], 5, canvasRef.current.height - 30 + (i * lineheight));
+                  }
+            }else{
+                canvasContext.fillText(displayMessage, 5, canvasRef.current.height - 30);
+            }
+        }
     }
 
     function setImageAndAudioInCanvas() {

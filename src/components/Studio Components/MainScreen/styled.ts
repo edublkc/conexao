@@ -124,6 +124,7 @@ export const Videos = styled.div`
     padding: 1rem;
     background-color: #252627;
     border-top: 1px solid #808080;
+    overflow: hidden;
 
 `
 
