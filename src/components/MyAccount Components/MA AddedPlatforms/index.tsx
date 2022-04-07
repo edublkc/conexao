@@ -1,10 +1,10 @@
 import { useContext } from "react"
-import { PlatformsContext } from "../../../context/platformsContext"
+import { BroadcastInformationsContext } from "../../../context/broadcastInformationsContext"
 import { themes } from "../../../styles/themes"
 import { Container } from './styled'
 
 export function MAAddedPlatforms() {
-    const { platforms } = useContext(PlatformsContext)
+    const { platforms } = useContext(BroadcastInformationsContext)
     
 
     return (

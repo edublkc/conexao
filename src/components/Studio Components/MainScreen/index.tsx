@@ -1,15 +1,15 @@
 import { useContext, useEffect, useRef, useState } from "react"
-import { Container, MainVideo, Options, ScreenLayouts, Thumbs, Videos, Wrapp } from "./styled"
+import { Container, MainVideo, Options, Thumbs, Videos, Wrapp } from "./styled"
 
 import { MdOutlineScreenShare } from "react-icons/md"
 import { BsCameraVideoFill, BsCameraVideoOffFill, BsMicFill, BsMicMuteFill } from "react-icons/bs"
-import { isChatMessageSelected, PlatformsContext } from "../../../context/platformsContext"
-import { themes } from "../../../styles/themes"
-import { StartStreamButton } from "../StartStreamButton"
-import { SelectDevices } from "../SelectDevices"
-import { EditVideoSideBar } from "../EditVideoSideBar/SideBar"
+import { isChatMessageSelected,displayMessage, displayName} from "../../../context/canvasContext"
 
-import {displayMessage, displayName} from "../../../context/platformsContext"
+import { themes } from "../../../styles/themes"
+
+
+import { useCanvasContext } from "../../../context/canvasContext"
+import { BroadcastInformationsContext } from "../../../context/broadcastInformationsContext"
 
 let canvasContext: CanvasRenderingContext2D | null
 
@@ -24,12 +24,9 @@ let cameraX1 = 700
 let cameraY1 = 393
 
 export function MainScreen() {
-    const { broadcastInformations, 
-        nameToBeDisplayed, 
-        devices, 
-        setCanvasStream: setCanvasStreamContext,
-        setAudioStream: setAudioStreamContext,
-        selectedChatMessage} = useContext(PlatformsContext)
+    const { broadcastInformations} = useContext(BroadcastInformationsContext)
+
+    const {devices,nameToBeDisplayed,setCanvasStream: setCanvasStreamContext,setAudioStream: setAudioStreamContext} = useCanvasContext()
 
 
     const canvasRef = useRef<HTMLCanvasElement>({} as HTMLCanvasElement)

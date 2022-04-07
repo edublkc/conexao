@@ -4,14 +4,14 @@ import { useContext, useEffect } from "react"
 import { Container } from "./styled"
 import { AiFillYoutube } from "react-icons/ai"
 
-import { PlatformsContext } from "../../../context/platformsContext"
+import { BroadcastInformationsContext } from "../../../context/broadcastInformationsContext"
 
 import { ToastContainer, toast } from 'react-toastify';
 
 
 export function MAAddYoutube() {
     const navigate = useNavigate()
-    const { platforms, setPlatform } = useContext(PlatformsContext)
+    const { platforms, setPlatform } = useContext(BroadcastInformationsContext)
 
     const authenticate = () => {
         return (window.gapi as any).auth2?.getAuthInstance()?.signIn({ scope: "https://www.googleapis.com/auth/youtube.force-ssl" }).then((res: any) => {

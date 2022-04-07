@@ -3,8 +3,8 @@ import { Container } from "./styled"
 import { BsCameraVideo, BsMic } from "react-icons/bs"
 import { themes } from "../../../styles/themes"
 import React, { useContext, useEffect, useRef, useState } from "react"
-import { PlatformsContext } from "../../../context/platformsContext"
 import { useNavigate } from "react-router-dom"
+import { useCanvasContext } from "../../../context/canvasContext"
 
 interface SelectDevicesProps{
     isDevicesConfigOpen?: React.Dispatch<React.SetStateAction<boolean>>
@@ -14,8 +14,9 @@ interface SelectDevicesProps{
 export function SelectDevices(props: SelectDevicesProps) {
     const navigate = useNavigate()
 
-    const {devices,setDevices,nameToBeDisplayed,setNameToBeDisplayed} = useContext(PlatformsContext)    
+    const {devices,setDevices,nameToBeDisplayed,setNameToBeDisplayed} = useCanvasContext()
     
+
     const [micDevices, setMicDevices] = useState<MediaDeviceInfo[]>([])
     const [cameraDevices, setCameraDevices] = useState<MediaDeviceInfo[]>([])
 

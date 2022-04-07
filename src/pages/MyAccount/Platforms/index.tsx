@@ -3,13 +3,12 @@ import { MAAddedPlatforms } from "../../../components/MyAccount Components/MA Ad
 import { MAAddPlatform } from "../../../components/MyAccount Components/MA AddPlatform";
 import { MAHeader } from "../../../components/MyAccount Components/MA Header";
 import { MASideBar } from "../../../components/MyAccount Components/MA SideBar";
-import { PlatformsContext } from "../../../context/platformsContext";
-import { Youtube } from "../../../services/youtubeLiveApi";
+import { BroadcastInformationsContext } from "../../../context/broadcastInformationsContext";
 import { Container, Content, Wrapper } from "./styled";
 
 
 export function Platforms() {
-    const { platforms } = useContext(PlatformsContext)
+    const { platforms } = useContext(BroadcastInformationsContext)
 
     return (
         <Container>

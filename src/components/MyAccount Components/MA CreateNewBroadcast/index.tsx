@@ -5,7 +5,7 @@ import ReactModal from 'react-modal';
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { Platform, PlatformsContext } from "../../../context/platformsContext";
+import { Platform, BroadcastInformationsContext } from "../../../context/broadcastInformationsContext";
 
 
 import { useForm } from "react-hook-form";
@@ -37,9 +37,8 @@ const schema = yup.object({
 
 export function MACreateNewBroadcast() {
     const navigate = useNavigate()
-    const { setBroadcastInformations, setYoutubeBroadcast } = useContext(PlatformsContext)
-    const { platforms } = useContext(PlatformsContext)
-
+    const { setBroadcastInformations, setYoutubeBroadcast,platforms} = useContext(BroadcastInformationsContext)
+    
     const { register, handleSubmit, formState: { errors } } = useForm<CreateBroadcastInformations>({
         resolver: yupResolver(schema)
 

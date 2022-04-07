@@ -1,6 +1,6 @@
 import { Container } from "./styled";
 import { useContext, useEffect, useState } from "react";
-import { chatETag, isChatMessageSelected, PlatformsContext } from "../../../context/platformsContext";
+import { isChatMessageSelected, useCanvasContext } from "../../../context/canvasContext";
 
 
 let nextPageToken: string
@@ -17,7 +17,7 @@ type ChatMessages = {
 }
 
 export function Chat() {
-    const {changeSelectedChatMessage} = useContext(PlatformsContext)
+    const {changeSelectedChatMessage} = useCanvasContext()
 
     const [chatMessages, setChatMessages] = useState<ChatMessages[]>([{
         etag: 'sdfsdfsdfsd',
@@ -43,8 +43,8 @@ export function Chat() {
 
     useEffect(()=>{
         //const updateChatMessages = setInterval(execute,timerForUpdateChat)
-        console.log(isChatMessageSelected)
-    },[isChatMessageSelected])
+        
+    },[])
 
     async function execute() {
         const reqChat = await (window.gapi as any)?.client.youtube.liveChatMessages.list({

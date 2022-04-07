@@ -1,9 +1,10 @@
 import { useContext, useEffect, useState } from "react"
-import { PlatformsContext } from "../../../context/platformsContext"
+import { BroadcastInformationsContext } from "../../../context/broadcastInformationsContext"
 import {Container} from "./styled"
 import {RiBroadcastFill} from "react-icons/ri"
 
 import { io } from "socket.io-client"
+import { useCanvasContext } from "../../../context/canvasContext"
 
 const socketOptions = { secure: true, reconnection: true, reconnectionDelay: 1000, timeout: 15000, pingTimeout: 15000, pingInterval: 45000, query: { framespersecond: 15, audioBitrate: 22050 } };
 const socket = io('http://localhost:3036', socketOptions)
@@ -14,7 +15,8 @@ interface StartStreamButtonProps{
 }
 
 export function StartStreamButton(){
-    const {youtubeBroadcast,canvasStream,audioStream} = useContext(PlatformsContext)
+    const {youtubeBroadcast} = useContext(BroadcastInformationsContext)
+    const {canvasStream,audioStream} = useCanvasContext()
     const [isLive,setIsLive] = useState(false)
 
 

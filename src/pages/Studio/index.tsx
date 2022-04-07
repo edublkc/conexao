@@ -11,22 +11,24 @@ export function Studio() {
 
     return (
         <>
-            <MAHeader />
+            
+                <MAHeader />
 
-            <Container>
-                <LeftSide>
-                    <EditVideoSideBar/>
-                </LeftSide>
+                <Container>
+                    <LeftSide>
+                        <EditVideoSideBar />
+                    </LeftSide>
 
-                <Center>
-                    <MainScreen />
-                </Center>
+                    <Center>
+                        <MainScreen />
+                    </Center>
 
-                <RightSide>
-                    <Chat/>
-                </RightSide>
+                    <RightSide>
+                        <Chat />
+                    </RightSide>
 
-            </Container>
+                </Container>
+            
         </>
 
     )

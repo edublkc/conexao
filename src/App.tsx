@@ -2,18 +2,23 @@ import { BrowserRouter } from 'react-router-dom';
 import { GlobalStyle } from './styles/global';
 import { RouterConfig } from './routes/Routes';
 import { FirebaseAuthProvider } from './context/firebaseAuthContext';
-import { PlatformsContextProvider } from './context/platformsContext'
+import { BroadcastInformationsContextProvider } from './context/broadcastInformationsContext'
+import { CanvasContextProvider } from "./context/canvasContext";
 
 function App() {
   return (
-    <PlatformsContextProvider>
-      <FirebaseAuthProvider>
-        <BrowserRouter>
-          <RouterConfig />
-          <GlobalStyle />
-        </BrowserRouter>
-      </FirebaseAuthProvider>
-    </PlatformsContextProvider>
+
+    <CanvasContextProvider>
+      <BroadcastInformationsContextProvider>
+        <FirebaseAuthProvider>
+          <BrowserRouter>
+            <RouterConfig />
+            <GlobalStyle />
+          </BrowserRouter>
+        </FirebaseAuthProvider>
+      </BroadcastInformationsContextProvider>
+    </CanvasContextProvider>
+
 
   );
 }
