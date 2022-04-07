@@ -10,8 +10,8 @@ padding: 0.5rem;
         padding: 0.5rem;
         border-radius: 5px;
         cursor: pointer;
-        transition: border 0.2s;
-
+        transition:  0.2s;
+        position: relative;
 
         & + .chat-box {
             margin-top: 0.5rem;
@@ -39,9 +39,22 @@ padding: 0.5rem;
             }
         }
 
-        &:hover{
-            border: 1px solid ${themes.colors.pink[200]};
+        &:not(.active):hover{
+            &::before{
+                content: 'Exibir mensagem';
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0,0,0,0.7);
+            }
         }
+
+       
 
         &.active{
             background-color: ${themes.colors.pink[200]};
@@ -52,6 +65,23 @@ padding: 0.5rem;
                 font-weight: 400;
                 color: #121212;
             }
+
+            &:hover{
+            &::before{
+                content: 'Remover mensagem';
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0,0,0,0.5);
+                color: #fff;
+                font-weight: 400;
+            }
+        }
         }
     }
 
