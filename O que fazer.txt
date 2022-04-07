@@ -12,6 +12,28 @@
 
 -Pegar chat da transmissao [x]
 
--Exibir as mensagens na transmissão []
+-Exibir as mensagens na transmissão [X]
 
 - Encerrar transmissao por botão []
+
+- Criar funcionalidades para a side bar[]
+    - Layouts[]
+    - Cores[]
+    - Exibir algum texto[]
+    - Ajustar tamanho da camera[]
+
+- Adicionar marca d'agua do Connection []
+
+- Ajustar e deixar pronto o design da pagina de studio []
+
+- Adicionar twitch na plataforma []
+
+- Melhorar qualidade da transmissão []
+
+- Ajustes de regra de negocio []
+
+- Mudar front-end da pagina inicial []
+
+- Passar pente fino em tudo []
+
+- Colocar em produção []
