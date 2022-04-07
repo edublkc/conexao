@@ -23,6 +23,8 @@ interface CanvasContextData {
     setAudioStream: React.Dispatch<any>
 
     changeSelectedChatMessage: (name: string, message: string, etag: string) => void
+
+    chatSpecificMessageTag: string
 }
 
 export const CanvasContext = createContext({} as CanvasContextData)
@@ -41,15 +43,18 @@ export function CanvasContextProvider({ children }: CanvasContextProviderProps) 
     const [canvasStream, setCanvasStream] = useState({} as MediaStream)
     const [audioStream, setAudioStream] = useState({} as MediaStream)
 
+    const [chatSpecificMessageTag,setChatSpecificMessageTag] = useState('')
 
     function changeSelectedChatMessage(name: string, message: string, etag: string) {
         console.log(etag)
         if (chatETag === etag) {
             isChatMessageSelected = false
             chatETag = ''
+            setChatSpecificMessageTag('')
             displayName = ''
             displayMessage = ''
         } else {
+            setChatSpecificMessageTag(etag)
             chatETag = etag
             displayName = name
             displayMessage = message
@@ -68,7 +73,8 @@ export function CanvasContextProvider({ children }: CanvasContextProviderProps) 
             setCanvasStream,
             audioStream,
             setAudioStream,
-            changeSelectedChatMessage
+            changeSelectedChatMessage,
+            chatSpecificMessageTag
         }}>
 
             {children}

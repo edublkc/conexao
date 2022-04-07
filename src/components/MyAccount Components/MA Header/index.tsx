@@ -8,7 +8,7 @@ import { Container } from "./styled"
 import { SignoutButton } from "../../SingoutButton"
 
 import { SyncLoader } from "react-spinners"
-import { StartStreamButton } from "../../Studio Components/StartStreamButton"
+import { StartStreamButton } from "../../Studio Components/ST StartStreamButton"
 
 
 

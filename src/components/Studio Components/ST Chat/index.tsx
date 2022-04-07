@@ -1,6 +1,7 @@
 import { Container } from "./styled";
 import { useContext, useEffect, useState } from "react";
 import { isChatMessageSelected, useCanvasContext } from "../../../context/canvasContext";
+import { BroadcastInformationsContext } from "../../../context/broadcastInformationsContext";
 
 
 let nextPageToken: string
@@ -17,7 +18,9 @@ type ChatMessages = {
 }
 
 export function Chat() {
-    const {changeSelectedChatMessage} = useCanvasContext()
+    const {youtubeBroadcast} = useContext(BroadcastInformationsContext)
+
+    const {changeSelectedChatMessage,chatSpecificMessageTag} = useCanvasContext()
 
     const [chatMessages, setChatMessages] = useState<ChatMessages[]>([{
         etag: 'sdfsdfsdfsd',
@@ -48,7 +51,7 @@ export function Chat() {
 
     async function execute() {
         const reqChat = await (window.gapi as any)?.client.youtube.liveChatMessages.list({
-            "liveChatId": 'KicKGFVDT0l5SFRMSnNKb1BWSjJQRV9mbkFSdxILZUt4VVYyU3JXQms', //youtubeBroadcast.liveChatId,
+            "liveChatId": youtubeBroadcast.liveChatId,
             "part": [
                 "snippet,authorDetails",
 
@@ -69,7 +72,7 @@ export function Chat() {
                     return (
                         <div 
                         key={chat.etag} 
-                        className={`chat-box ${isChatMessageSelected ? 'active' : ''}`}
+                        className={`chat-box ${chatSpecificMessageTag === chat.etag ? 'active' : ''}`}
                         onClick={() => changeSelectedChatMessage(chat.authorDetails.displayName,chat.snippet.displayMessage,chat.etag)}>
 
                             <div className="left-side">
@@ -89,3 +92,26 @@ export function Chat() {
         </Container>
     )
 }
+
+
+/*
+   const [chatMessages, setChatMessages] = useState<ChatMessages[]>([{
+        etag: 'sdfsdfsdfsd',
+        authorDetails: {
+            displayName: 'Eduardo Mota',
+            profileImageUrl: 'wwww'
+        },
+        snippet:{
+            displayMessage: 'Manda um salve ai'
+        }
+    },{
+        etag: 'sdfsdfsdfsdghjghj',
+        authorDetails: {
+            displayName: 'Charles Chaplin',
+            profileImageUrl: 'wwww'
+        },
+        snippet:{
+            displayMessage: 'Etiam posuere quam ac quam. Maecenas aliquet accumsan leo. Nullam dapibus fermentum ipsum. Etiam quis quam. Integer lacinia. Nulla est. Nulla turpis magna, cursus sit amet, suscipit a, interdum id,fdf'
+        }
+    }])
+*/

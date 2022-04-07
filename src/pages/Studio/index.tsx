@@ -1,8 +1,8 @@
 import { MAHeader } from "../../components/MyAccount Components/MA Header";
 
 import { Center, Container, LeftSide, RightSide } from "./styled";
-import { MainScreen } from "../../components/Studio Components/MainScreen";
-import { Chat } from "../../components/Studio Components/Chat";
+import { MainScreen } from "../../components/Studio Components/ST MainScreen";
+import { Chat } from "../../components/Studio Components/ST Chat";
 import { EditVideoSideBar } from "../../components/Studio Components/EditVideoSideBar/SideBar";
 
 
