@@ -14,7 +14,7 @@ export interface streamInformations {
     liveChatId: string
 }
 
-let broadcastId: string
+export let broadcastId: string
 let streamId: string
 let youtubeIngestionUrl:string
 let youtubeStreamName:string

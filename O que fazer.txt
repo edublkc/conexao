@@ -14,7 +14,7 @@
 
 -Exibir as mensagens na transmissão [X]
 
-- Encerrar transmissao por botão []
+- Encerrar transmissao por botão [X]
 
 - Criar funcionalidades para a side bar[]
     - Layouts[]
