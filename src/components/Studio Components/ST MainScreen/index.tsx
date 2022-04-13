@@ -356,10 +356,6 @@ export function MainScreen() {
         <Container>
             <Wrapp>
                 <MainVideo>
-                    <button onClick={debug}>
-                        DEBUGAR
-                    </button>
-                    
                     <header>
                         <h1>{broadcastInformations.title}</h1>
                     </header>
@@ -408,7 +404,9 @@ export function MainScreen() {
 
 /*
  
-
+ <button onClick={debug}>
+                        DEBUGAR
+                    </button>
 
  <ScreenLayouts>
                     <div className="screenBase" onClick={() => setSelectedScreenLayout('cameraOnly')}>

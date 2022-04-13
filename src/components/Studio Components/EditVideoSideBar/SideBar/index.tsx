@@ -48,13 +48,13 @@ export function EditVideoSideBar() {
 
     return (
         <Container>
-            <Options style={{ borderRight: `${isSideBarOpen ? '' : '1px solid #808080'}` }}>
+            <Options style={{ borderRight: `${isSideBarOpen ? '' : '1px solid rgba(128, 128, 128,0.2)'}` }}>
                 <div
                     className={`icons ${optionSelected.screenLayout ? 'active' : ''}`}
                     onClick={handleOpenSideBarScreenLayout}
                 >
                     <RiLayout2Line fontSize='1.5rem' />
-                    <span>Templates</span>
+                    <span>Screen Layout</span>
                 </div>
 
                 <div

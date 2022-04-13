@@ -3,7 +3,7 @@ import styled from "styled-components"
 export const Container = styled.div`
     background-color: #18191B;
     width: 100%;
-    height: calc(100vh - 80px);
+    height: calc(100vh - 48px);
     display: flex;
 `
 
@@ -69,8 +69,8 @@ export const SelectedOption = styled.div`
     background-color: #252627;
     width: 100%;
     width: 250px;
-    border-right: 1px solid #808080;
-    padding: 0.875rem;
+    border-right: 1px solid rgba(128, 128, 128,0.2);
+    
     
 
     .closeButton{
@@ -90,6 +90,7 @@ export const SelectedOption = styled.div`
 
         span{
             flex: 1;
+            padding: 0.5rem;
         }
     }
 `

@@ -6,10 +6,9 @@ export const Container = styled.button`
     background-color:${themes.colors.pink[500]};
 
     border-radius: 0.3125rem;
-    padding:0.5rem 0.625rem;
+    padding:0.25rem 0.625rem;
     font-size: 0.875rem;
-    font-weight: 700;
-    font-size: 0.812rem;
+    font-weight: 600;
     transition:0.2s ;
 
     display: flex;
@@ -18,7 +17,7 @@ export const Container = styled.button`
     gap: 0.5rem;
 
     &:hover{
-        filter:brightness(0.9);
+        filter:brightness(0.8);
     }
     
 `

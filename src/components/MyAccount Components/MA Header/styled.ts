@@ -6,7 +6,7 @@ export const Container = styled.header`
     align-items:center;
     justify-content:center ;
     box-shadow: 0px 1px 1px rgba(0,0,0,0.14),0px 2px 1px rgba(0,0,0,0.12),0px 1px 3px rgba(0,0,0,0.2);
-
+    border-bottom:1px solid rgba(128, 128, 128,0.2);
     .wrapper{
         width:100%;
         max-width: 1440px;

@@ -3,26 +3,29 @@ import styled from "styled-components"
 
 export const Container = styled.div`
     width: 100%;
-    height: calc(100vh - 80px);
+    height: calc(100vh - 48px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     background-color: #0D1216;
+    
 `
 
 export const Wrapp = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 100%;
+    overflow: hidden;
 `
 
 
 export const MainVideo = styled.div`
-    
 
     header{
         display: flex;
         flex-direction: column;
+        
 
             h1{
                 font-size: 1.5rem;
@@ -123,7 +126,7 @@ export const Videos = styled.div`
     gap: 2rem;
     padding: 1rem;
     background-color: #252627;
-    border-top: 1px solid #808080;
+    border-top: 1px solid rgba(128, 128, 128,0.2);
     overflow: hidden;
 
 `

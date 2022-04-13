@@ -10,6 +10,10 @@ export const GlobalStyle = createGlobalStyle`
         
     }
 
+    :root{
+        --swiper-navigation-size: 22px;
+    }
+
     body,textArea,input{
         font-family:'Poppins',sans-serif;
         background-color:${themes.colors.bg}; 

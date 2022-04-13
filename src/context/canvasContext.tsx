@@ -46,7 +46,6 @@ export function CanvasContextProvider({ children }: CanvasContextProviderProps) 
     const [chatSpecificMessageTag,setChatSpecificMessageTag] = useState('')
 
     function changeSelectedChatMessage(name: string, message: string, etag: string) {
-        console.log(etag)
         if (chatETag === etag) {
             isChatMessageSelected = false
             chatETag = ''
