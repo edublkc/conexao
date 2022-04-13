@@ -1,19 +1,15 @@
 import { useState } from "react";
 import { TabMenu } from "../../../TabMenu";
-import { Container, Content, SlideOption } from "./styled";
+import { Container, Content } from "./styled";
 
-import { MdNavigateBefore, MdNavigateNext } from "react-icons/md"
-
-// Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
-
-// import required modules
 import { Navigation } from "swiper";
-import { Pagination } from "swiper";
+import { BsCameraVideoFill } from "react-icons/bs";
+import { themes } from "../../../../styles/themes";
+import { setSelectedScreenLayout } from "../../../../draws/screenLayoutDraw";
+
 
 const tabOptions = ['Layouts', 'Configurations']
 
@@ -22,7 +18,7 @@ export function ScreenLayout() {
 
     return (
         <Container>
-          
+
             <TabMenu
                 options={tabOptions}
                 selectedTabOptionValue={selectedTabOption}
@@ -36,36 +32,66 @@ export function ScreenLayout() {
                         <h3>Compartilhando tela</h3>
                         <Swiper
                             slidesPerView={3}
-                            spaceBetween={10}
-                            pagination={{
-                                clickable: true,
-                            }}
+                            spaceBetween={5}
                             navigation={true}
                             modules={[Navigation]}
                             className="mySwiper"
                         >
                             <SwiperSlide>
-                                <img src="https://template.canva.com/EAE4tobQkzo/1/0/400w-ft25ewtAe8k.jpg" />
+                                <div className="screenBase" onClick={() => setSelectedScreenLayout('cameraOnly')}>
+                                    <div className="cameraOnly center sizes">
+                                        <BsCameraVideoFill fontSize="2rem" color={themes.colors.pink[500]} />
+                                    </div>
+                                </div>
                             </SwiperSlide>
 
                             <SwiperSlide>
-                                <img src="https://template.canva.com/EAE4tobQkzo/1/0/400w-ft25ewtAe8k.jpg" />
+                                <div className="screenBase" onClick={() => setSelectedScreenLayout('screenOnly')}>
+                                    <div className="screenOnly center sizes">
+                                    </div>
+                                </div>
                             </SwiperSlide>
 
                             <SwiperSlide>
-                            <img src="https://template.canva.com/EAE4tobQkzo/1/0/400w-ft25ewtAe8k.jpg"/>
+                                <div className="screenBase" onClick={() => setSelectedScreenLayout('bottomLeft')}>
+                                    <div className="bottomLeft sizes">
+                                        <BsCameraVideoFill fontSize="0.8rem" color="#fff" />
+                                    </div>
+                                </div>
+
                             </SwiperSlide>
 
                             <SwiperSlide>
-                                <img src="https://template.canva.com/EAE4tobQkzo/1/0/400w-ft25ewtAe8k.jpg" />
+                                <div className="screenBase" onClick={() => setSelectedScreenLayout('bottomRight')}>
+                                    <div className="bottomRight sizes">
+                                        <BsCameraVideoFill fontSize="0.8rem" color="#fff" />
+                                    </div>
+                                </div>
                             </SwiperSlide>
 
                             <SwiperSlide>
-                                <img src="https://template.canva.com/EAE4tobQkzo/1/0/400w-ft25ewtAe8k.jpg" />
+                                <div className="screenBase" onClick={() => setSelectedScreenLayout('topRight')}>
+                                    <div className="topRight sizes">
+                                        <BsCameraVideoFill fontSize="0.8rem" color="#fff" />
+                                    </div>
+                                </div>
                             </SwiperSlide>
 
+
                             <SwiperSlide>
-                            <img src="https://template.canva.com/EAE4tobQkzo/1/0/400w-ft25ewtAe8k.jpg"/>
+                                <div className="screenBase" onClick={() => setSelectedScreenLayout('topLeft')}>
+                                    <div className="topLeft sizes">
+                                        <BsCameraVideoFill fontSize="0.8rem" color="#fff" />
+                                    </div>
+                                </div>
+                            </SwiperSlide>
+
+
+                            <SwiperSlide>
+                                <div className="screenBase" onClick={() => setSelectedScreenLayout('sideBySide')}>
+                                    <BsCameraVideoFill fontSize="0.8rem" color={themes.colors.pink[500]} />
+                                    <div className="screen sizes"></div>
+                                </div>
                             </SwiperSlide>
 
                         </Swiper>

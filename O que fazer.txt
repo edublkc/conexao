@@ -17,7 +17,7 @@
 - Encerrar transmissao por botão [X]
 
 - Criar funcionalidades para a side bar[]
-    - Layouts[]
+    - Layouts[x]
     - Cores[]
     - Exibir algum texto[]
     - Ajustar tamanho da camera[]

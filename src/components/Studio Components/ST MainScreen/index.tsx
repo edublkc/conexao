@@ -10,10 +10,12 @@ import { themes } from "../../../styles/themes"
 
 import { useCanvasContext } from "../../../context/canvasContext"
 import { BroadcastInformationsContext } from "../../../context/broadcastInformationsContext"
+import { cameraX0, cameraX1, cameraY0, cameraY1, screenX0, screenX1, screenY0, screenY1 } from "../../../draws/positionsDraw"
+import { setSelectedScreenLayout } from "../../../draws/screenLayoutDraw"
 
 let canvasContext: CanvasRenderingContext2D | null
 
-let screenX0 = 0;
+/*let screenX0 = 0;
 let screenY0 = 0;
 let screenX1 = 0
 let screenY1 = 0
@@ -22,6 +24,7 @@ let cameraX0 = 0;
 let cameraY0 = 0;
 let cameraX1 = 700
 let cameraY1 = 393
+*/
 
 export function MainScreen() {
     const { broadcastInformations} = useContext(BroadcastInformationsContext)
@@ -128,10 +131,8 @@ export function MainScreen() {
             cameraX1,
             cameraY1)
 
-        if (canvasContext) {
-            
-      
 
+        if (canvasContext) {
             if(isChatMessageSelected){
                 drawMessage()
             }else{
@@ -211,95 +212,7 @@ export function MainScreen() {
 
     }
 
-    function setSelectedScreenLayout(layout: string) {
-        switch (layout) {
-            case 'cameraOnly':
-                screenX0 = 0;
-                screenY0 = 0;
-                screenX1 = 0;
-                screenY1 = 0;
-
-                cameraX0 = 0;
-                cameraY0 = 0;
-                cameraX1 = 700;
-                cameraY1 = 393;
-                break;
-
-            case 'screenOnly':
-                screenX0 = 0;
-                screenY0 = 0;
-                screenX1 = 700;
-                screenY1 = 393;
-
-                cameraX0 = 0;
-                cameraY0 = 0;
-                cameraX1 = 0;
-                cameraY1 = 0;
-                break;
-
-            case 'bottomRight':
-                screenX0 = 0;
-                screenY0 = 0;
-                screenX1 = canvasRef.current.width;
-                screenY1 = canvasRef.current.height;
-
-                cameraX0 = .625 * canvasRef.current.width;
-                cameraY0 = .625 * canvasRef.current.height;
-                cameraX1 = canvasRef.current.width / 3;
-                cameraY1 = canvasRef.current.height / 3;
-                break;
-
-            case 'bottomLeft':
-                screenX0 = 0;
-                screenY0 = 0;
-                screenX1 = canvasRef.current.width;
-                screenY1 = canvasRef.current.height;
-
-                cameraX0 = 28;
-                cameraY0 = .625 * canvasRef.current.height;
-                cameraX1 = canvasRef.current.width / 3;
-                cameraY1 = canvasRef.current.height / 3;
-                break;
-
-            case 'topRight':
-                screenX0 = 0;
-                screenY0 = 0;
-                screenX1 = canvasRef.current.width;
-                screenY1 = canvasRef.current.height;
-
-                cameraX0 = .625 * canvasRef.current.width;
-                cameraY0 = 15;
-                cameraX1 = canvasRef.current.width / 3;
-                cameraY1 = canvasRef.current.height / 3;
-                break;
-
-            case 'topLeft':
-                screenX0 = 0;
-                screenY0 = 0;
-                screenX1 = canvasRef.current.width;
-                screenY1 = canvasRef.current.height;
-
-                cameraX0 = 15;
-                cameraY0 = 15;
-                cameraX1 = canvasRef.current.width / 3;
-                cameraY1 = canvasRef.current.height / 3;
-                break;
-
-            case 'sideBySide':
-                screenX0 = canvasRef.current.width * 0.20;
-                screenY0 = canvasRef.current.height * 0.1;
-                screenX1 = canvasRef.current.width * 0.8;
-                screenY1 = canvasRef.current.height * 0.8;
-
-                cameraX0 = canvasRef.current.width * 0.01;
-                cameraY0 = canvasRef.current.height * 0.38;
-                cameraX1 = canvasRef.current.width * 0.18;
-                cameraY1 = canvasRef.current.height * 0.24;
-                break;
-        }
-
-    }
-
+    
     function toggleCamera() {
         setIsCameraStop(!isCameraStop)
         handleStopVideo()
@@ -388,67 +301,14 @@ export function MainScreen() {
                     </div>
 
 
-                    <div className="thumbnail" onClick={() => setSelectedScreenLayout('bottomRight')} style={{ display: `${isScreenSharing ? 'block' : 'none'}` }}>
+                    <div className="thumbnail" onClick={() => setSelectedScreenLayout('screenOnly')} style={{ display: `${isScreenSharing ? 'block' : 'none'}` }}>
                         <video ref={shareScreenRef} autoPlay muted id="camera" />
                     </div>
                 </Thumbs>
 
-
             </Videos>
-
 
         </Container>
     )
 }
 
-
-/*
- 
- <button onClick={debug}>
-                        DEBUGAR
-                    </button>
-
- <ScreenLayouts>
-                    <div className="screenBase" onClick={() => setSelectedScreenLayout('cameraOnly')}>
-                        <div className="cameraOnly center sizes">
-                            <BsCameraVideoFill fontSize="2rem" color={themes.colors.pink[500]} />
-                        </div>
-                    </div>
-
-                    <div className="screenBase" onClick={() => setSelectedScreenLayout('screenOnly')}>
-                        <div className="screenOnly center sizes">
-                        </div>
-                    </div>
-
-                    <div className="screenBase active" onClick={() => setSelectedScreenLayout('bottomRight')}>
-                        <div className="bottomRight sizes">
-                            <BsCameraVideoFill fontSize="0.8rem" color="#fff" />
-                        </div>
-                    </div>
-
-                    <div className="screenBase" onClick={() => setSelectedScreenLayout('bottomLeft')}>
-                        <div className="bottomLeft sizes">
-                            <BsCameraVideoFill fontSize="0.8rem" color="#fff" />
-                        </div>
-                    </div>
-
-                    <div className="screenBase" onClick={() => setSelectedScreenLayout('topRight')}>
-                        <div className="topRight sizes">
-                            <BsCameraVideoFill fontSize="0.8rem" color="#fff" />
-                        </div>
-                    </div>
-
-                    <div className="screenBase" onClick={() => setSelectedScreenLayout('topLeft')}>
-                        <div className="topLeft sizes">
-                            <BsCameraVideoFill fontSize="0.8rem" color="#fff" />
-                        </div>
-                    </div>
-
-                    <div className="screenBase" onClick={() => setSelectedScreenLayout('sideBySide')}>
-                        <BsCameraVideoFill fontSize="0.8rem" color={themes.colors.pink[500]} />
-                        <div className="screen sizes"></div>
-                    </div>
-
-                </ScreenLayouts>
-
-*/
