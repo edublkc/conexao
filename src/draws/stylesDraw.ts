@@ -1,15 +1,36 @@
 interface Props{
     nameTextColor: string
+    nameBackgroundColor: string
+
+    chatNameTextColor: string
+    chatNameBackgroundColor: string
+
+    chatMessageTextColor: string
+    chatMessageBackgroundColor: string
+
+    backgroundColor: string
 }
 
-interface stylesCanvasDraw{
-    nameTextColor: string
-}
 
 export function stylesDraw(props: Props){
     stylesCanvasDraw.nameTextColor = props.nameTextColor
+    stylesCanvasDraw.nameBackgroundColor = props.nameBackgroundColor
+
+    stylesCanvasDraw.chatNameTextColor = props.chatNameTextColor
+    stylesCanvasDraw.chatNameBackgroundColor = props.chatNameBackgroundColor
+
+    stylesCanvasDraw.chatMessageTextColor = props.chatMessageTextColor
+    stylesCanvasDraw.chatMessageBackgroundColor = props.chatMessageBackgroundColor
+
+    stylesCanvasDraw.backgroundColor = props.backgroundColor
 }
 
-export const stylesCanvasDraw:stylesCanvasDraw = {
-    nameTextColor: '#000'
+export const stylesCanvasDraw:Props = {
+    nameTextColor: '#ffffff',
+    nameBackgroundColor: '#000000',
+    chatNameTextColor: '#ffffff',
+    chatNameBackgroundColor: '#000000',
+    chatMessageTextColor: '#000000',
+    chatMessageBackgroundColor: '#ffffff',
+    backgroundColor: '#0066ff'
 }

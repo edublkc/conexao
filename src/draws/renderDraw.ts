@@ -15,7 +15,7 @@ export function drawInCanvas(video: any, ctx: CanvasRenderingContext2D | null, s
     ctx?.clearRect(0,0,canvasWidth,canvasHeight)
 
     if (ctx) {
-        ctx.fillStyle = 'rgb(10, 76, 199)'
+        ctx.fillStyle = stylesCanvasDraw.backgroundColor
     }
 
     ctx?.fillRect(0, 0, canvasWidth, canvasHeight)
@@ -38,17 +38,26 @@ export function drawInCanvas(video: any, ctx: CanvasRenderingContext2D | null, s
         if(isChatMessageSelected){
             drawMessage()
         }else{
-            canvasContext.fillStyle = themes.colors.pink[500]
-
-            canvasContext.fillRect(0, canvasHeight - 40, canvasContext?.measureText(hostNameToBeDisplayed).width + 10, 30);
-
-            canvasContext.font = "20px Poppins";
-            canvasContext.fillStyle = stylesCanvasDraw.nameTextColor;
-            canvasContext.fillText(hostNameToBeDisplayed, 5, canvasHeight - 20)
+            renderHostName()
         }
         
     }
     
 
     setTimeout(drawInCanvas, 15, video, ctx, screen)
+}
+
+
+
+function renderHostName(){
+    if(canvasContext){
+        canvasContext.fillStyle = stylesCanvasDraw.nameBackgroundColor
+
+        canvasContext.fillRect(0, canvasHeight - 40, canvasContext?.measureText(hostNameToBeDisplayed).width + 10, 30);
+
+        canvasContext.font = "20px Poppins";
+        canvasContext.fillStyle = stylesCanvasDraw.nameTextColor;
+        canvasContext.fillText(hostNameToBeDisplayed, 5, canvasHeight - 20)
+    }
+    
 }
