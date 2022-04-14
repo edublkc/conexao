@@ -6,16 +6,18 @@ import React, { useContext, useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useCanvasContext } from "../../../context/canvasContext"
 
-interface SelectDevicesProps{
+interface SelectDevicesProps {
     isDevicesConfigOpen?: React.Dispatch<React.SetStateAction<boolean>>
     createMedia?: (stream: MediaStream) => Promise<void>
 }
 
+export let hostNameToBeDisplayed: string
+
 export function SelectDevices(props: SelectDevicesProps) {
     const navigate = useNavigate()
 
-    const {devices,setDevices,nameToBeDisplayed,setNameToBeDisplayed} = useCanvasContext()
-    
+    const { devices, setDevices, nameToBeDisplayed, setNameToBeDisplayed } = useCanvasContext()
+
 
     const [micDevices, setMicDevices] = useState<MediaDeviceInfo[]>([])
     const [cameraDevices, setCameraDevices] = useState<MediaDeviceInfo[]>([])
@@ -24,14 +26,14 @@ export function SelectDevices(props: SelectDevicesProps) {
 
     useEffect(() => {
         getCamAndMicDevices()
-        
+
     }, [])
 
-    useEffect(()=>{
+    useEffect(() => {
         getPermissionDevice()
-    },[devices])
+    }, [devices])
 
-    async function getPermissionDevice(){
+    async function getPermissionDevice() {
         var constraints = {
             audio: {
                 deviceId: devices.micId,
@@ -61,8 +63,8 @@ export function SelectDevices(props: SelectDevicesProps) {
 
     }
 
-    function handleGoToStudio(){
-        if(nameToBeDisplayed.trim() === ''){
+    function handleGoToStudio() {
+        if (nameToBeDisplayed.trim() === '') {
             alert('Digite um nome')
             return
         }
@@ -88,7 +90,7 @@ export function SelectDevices(props: SelectDevicesProps) {
 
                     <div className="deviceConfig">
                         <span><BsCameraVideo color={themes.colors.pink[500]} />Câmera</span>
-                        <select onChange={(e)=> setDevices({...devices,camId: e.target.value})}>
+                        <select onChange={(e) => setDevices({ ...devices, camId: e.target.value })}>
                             {cameraDevices.map((device) => {
 
                                 return (
@@ -102,7 +104,7 @@ export function SelectDevices(props: SelectDevicesProps) {
 
                     <div className="deviceConfig">
                         <span><BsMic color={themes.colors.pink[500]} />Áudio</span>
-                        <select onChange={(e)=> setDevices({...devices,micId: e.target.value})}>
+                        <select onChange={(e) => setDevices({ ...devices, micId: e.target.value })}>
                             {micDevices.map((device) => {
 
                                 return (
@@ -116,11 +118,14 @@ export function SelectDevices(props: SelectDevicesProps) {
 
                     <div className="deviceConfig">
                         <label>Nome a ser exibido: </label>
-                        <input type="text" value={nameToBeDisplayed} onChange={(e) => setNameToBeDisplayed(e.target.value)}/>
+                        <input type="text" value={nameToBeDisplayed} onChange={(e) => {
+                            setNameToBeDisplayed(e.target.value)
+                            hostNameToBeDisplayed = e.target.value
+                        }} />
                     </div>
 
                     <button className="goStudioButton" type="button" onClick={handleGoToStudio}>Ir para estúdio</button>
-                   
+
                 </div>
             </div>
 

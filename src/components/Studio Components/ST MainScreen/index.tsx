@@ -10,21 +10,10 @@ import { themes } from "../../../styles/themes"
 
 import { useCanvasContext } from "../../../context/canvasContext"
 import { BroadcastInformationsContext } from "../../../context/broadcastInformationsContext"
-import { cameraX0, cameraX1, cameraY0, cameraY1, screenX0, screenX1, screenY0, screenY1 } from "../../../draws/positionsDraw"
 import { setSelectedScreenLayout } from "../../../draws/screenLayoutDraw"
+import { canvasReference, drawInCanvas } from "../../../draws/renderDraw"
 
-let canvasContext: CanvasRenderingContext2D | null
-
-/*let screenX0 = 0;
-let screenY0 = 0;
-let screenX1 = 0
-let screenY1 = 0
-
-let cameraX0 = 0;
-let cameraY0 = 0;
-let cameraX1 = 700
-let cameraY1 = 393
-*/
+export let canvasContext: CanvasRenderingContext2D | null
 
 export function MainScreen() {
     const { broadcastInformations} = useContext(BroadcastInformationsContext)
@@ -109,92 +98,12 @@ export function MainScreen() {
         }
     }
 
-    function drawInCanvas(video: any, ctx: CanvasRenderingContext2D | null, screen?: any) {
-        ctx?.clearRect(0,0,canvasRef.current.width,canvasRef.current.height)
-
-        if (ctx) {
-            ctx.fillStyle = 'rgb(10, 76, 199)'
-        }
-
-        ctx?.fillRect(0, 0, canvasRef.current.width, canvasRef.current.height)
-        ctx?.drawImage(
-            screen,
-            screenX0,
-            screenY0,
-            screenX1,
-            screenY1)
-
-        ctx?.drawImage(
-            video,
-            cameraX0,
-            cameraY0,
-            cameraX1,
-            cameraY1)
-
-
-        if (canvasContext) {
-            if(isChatMessageSelected){
-                drawMessage()
-            }else{
-                canvasContext.fillStyle = themes.colors.pink[500]
-                canvasContext.fillRect(0, canvasRef.current.height - 40, canvasContext?.measureText(nameToBeDisplayed).width + 10, 30);
-    
-                canvasContext.font = "20px Poppins";
-                canvasContext.fillStyle = "#fff";
-                canvasContext.fillText(nameToBeDisplayed, 5, canvasRef.current.height - 20)
-            }
-            
-        }
-
-        setTimeout(drawInCanvas, 15, video, ctx, screen)
+    function update(video: any, ctx: CanvasRenderingContext2D | null, screen?: any) {
+        drawInCanvas(video,ctx,screen,canvasRef)
+        window.requestAnimationFrame(()=> update(video,ctx,screen))
+        //setTimeout(update, 15, video, ctx, screen)
     }
 
-    function drawMessage(){
-        if(canvasContext && displayMessage){
-        
-
-            //Draw Name
-            canvasContext.fillStyle = themes.colors.pink[500]
-            canvasContext.fillRect(0, canvasRef.current.height - 75, canvasContext?.measureText(displayName).width + 43, 30);
-
-            canvasContext.font = "16px Poppins";
-            canvasContext.fillStyle = "#fff";
-            canvasContext.fillText(displayName, 5, canvasRef.current.height - 58)
-
-            //Draw Message
-            
-
-            const lines = []
-
-
-            if(displayMessage.length > 95){
-                canvasContext.fillStyle = '#fff'
-                canvasContext.fillRect(0, canvasRef.current.height - 50, canvasContext.measureText(displayMessage).width + 15 , 50);
-            
-                canvasContext.font = "13px Poppins";
-                canvasContext.fillStyle = "#121212";
-
-                const firstLine = displayMessage.substring(0,95)
-                const secondLine = displayMessage.substring(95)
-                lines.push(firstLine)
-                lines.push(secondLine)
-
-                const lineheight = 20
-
-                for (let i = 0; i < lines.length; i++) {
-                    canvasContext.fillText(lines[i], 5, canvasRef.current.height - 30 + (i * lineheight));
-                  }
-            }else{
-                canvasContext.fillStyle = '#fff'
-                canvasContext.fillRect(0, canvasRef.current.height - 50, canvasContext.measureText(displayMessage).width , 25);
-            
-                canvasContext.font = "13px Poppins";
-                canvasContext.fillStyle = "#121212";
-
-                canvasContext.fillText(displayMessage, 5, canvasRef.current.height - 32.5);
-            }
-        }
-    }
 
     function setImageAndAudioInCanvas() {
         setCanvasStream(canvasRef.current.captureStream(35))
@@ -207,7 +116,8 @@ export function MainScreen() {
         }
 
         camRef.current.addEventListener('play', () => {
-            drawInCanvas(camRef.current, canvasContext, shareScreenRef.current)
+            update(camRef.current, canvasContext, shareScreenRef.current)
+            
         })
 
     }

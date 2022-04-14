@@ -5,6 +5,7 @@ import { BsPalette } from "react-icons/bs"
 import { MdOutlineArrowBackIosNew } from "react-icons/md"
 import { ScreenLayout } from "../ScreenLayout";
 import { useState } from "react";
+import { Styles } from "../Styles";
 
 interface optionSelected {
     screenLayout: boolean
@@ -22,14 +23,14 @@ export function EditVideoSideBar() {
     function handleOpenSideBarScreenLayout() {
         setAllOptionFalse()
         setIsSideBarOpen(true)
-        setTitleOption('Templates')
+        setTitleOption('Screen Layout')
         setOptionSelected({ ...optionSelected, screenLayout: true })
     }
 
     function handleOpenSideBarStyles() {
         setAllOptionFalse()
         setIsSideBarOpen(true)
-        setTitleOption('Estilos')
+        setTitleOption('Styles')
         setOptionSelected({ ...optionSelected, styles: true })
     }
 
@@ -62,19 +63,19 @@ export function EditVideoSideBar() {
                     onClick={handleOpenSideBarStyles}
                 >
                     <BsPalette fontSize='1.5rem' />
-                    <span>Estilos</span>
+                    <span>Styles</span>
                 </div>
             </Options>
 
             {isSideBarOpen && (
                 <SelectedOption>
                     <button onClick={closeSideBar} className="closeButton">
+                        <span>{titleOption.toUpperCase()}</span>
                         <MdOutlineArrowBackIosNew />
-                        <span>{titleOption}</span>
                     </button>
 
                     {optionSelected?.screenLayout && (<ScreenLayout />)}
-                    {optionSelected?.styles && (<>STYLES</>)}
+                    {optionSelected?.styles && (<Styles/>)}
                 </SelectedOption>
             )}
 

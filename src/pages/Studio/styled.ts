@@ -10,7 +10,7 @@ export const Container = styled.div`
 
 export const LeftSide = styled.div`
     height: calc(100vh - 48px);
-    
+    overflow: hidden;
 `
 
 

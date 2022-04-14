@@ -16,7 +16,7 @@ export const Options = styled.div`
     
 
     .icons{
-        width: 100%;
+        width: 53px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -67,8 +67,8 @@ export const Options = styled.div`
 
 export const SelectedOption = styled.div`
     background-color: #252627;
-    width: 100%;
     width: 250px;
+    
     border-right: 1px solid rgba(128, 128, 128,0.2);
     
     
@@ -78,19 +78,16 @@ export const SelectedOption = styled.div`
         display: flex;
         align-items: center;
         width: 100%;
-        gap: 0.5rem;
         transition: 0.2s;
-        font-weight: 600;
-        font-size: 1rem;
-        margin-bottom: 0.875rem;
-
-        &:hover{
-            filter: brightness(0.9);
-        }
+        font-weight: 700;
+        box-shadow: 0px 1px 1px rgba(0,0,0,0.14),0px 2px 1px rgba(0,0,0,0.12),0px 1px 3px rgba(0,0,0,0.2);
+    
+        padding: 0.5rem;
 
         span{
             flex: 1;
-            padding: 0.5rem;
+            font-size: 0.75rem;
+            font-family: 'Poppins',sans-serif;
         }
     }
 `
