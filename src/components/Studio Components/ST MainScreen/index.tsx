@@ -100,8 +100,8 @@ export function MainScreen() {
 
     function update(video: any, ctx: CanvasRenderingContext2D | null, screen?: any) {
         drawInCanvas(video,ctx,screen,canvasRef)
-        window.requestAnimationFrame(()=> update(video,ctx,screen))
-        //setTimeout(update, 15, video, ctx, screen)
+        //window.requestAnimationFrame(()=> update(video,ctx,screen))
+        setTimeout(update, 15, video, ctx, screen)
     }
 
 

@@ -7,7 +7,6 @@ import {  canvasHeight } from "./positionsDraw";
 
 export function drawMessage() {
     if (canvasContext && allChatMessages) {
-        console.log('to caindo aqui')
         //Draw Name
         canvasContext.fillStyle = themes.colors.pink[500]
         canvasContext.fillRect(0, canvasHeight - 75, canvasContext?.measureText(displayName).width + 43, 30);

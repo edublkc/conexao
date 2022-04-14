@@ -5,6 +5,7 @@ import { themes } from "../styles/themes"
 import { drawMessage } from "./chatMessagesDraw"
 import { cameraX0, cameraX1, cameraY0, cameraY1, screenX0, screenX1, screenY0, screenY1 } from "./positionsDraw"
 import { canvasHeight, canvasWidth } from "./positionsDraw"
+import { stylesCanvasDraw } from "./stylesDraw"
 
 export let canvasReference: React.MutableRefObject<HTMLCanvasElement>
 
@@ -38,10 +39,11 @@ export function drawInCanvas(video: any, ctx: CanvasRenderingContext2D | null, s
             drawMessage()
         }else{
             canvasContext.fillStyle = themes.colors.pink[500]
+
             canvasContext.fillRect(0, canvasHeight - 40, canvasContext?.measureText(hostNameToBeDisplayed).width + 10, 30);
 
             canvasContext.font = "20px Poppins";
-            canvasContext.fillStyle = "#fff";
+            canvasContext.fillStyle = stylesCanvasDraw.nameTextColor;
             canvasContext.fillText(hostNameToBeDisplayed, 5, canvasHeight - 20)
         }
         
