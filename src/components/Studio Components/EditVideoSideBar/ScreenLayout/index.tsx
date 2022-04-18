@@ -8,7 +8,7 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper";
 import { BsCameraVideoFill } from "react-icons/bs";
 import { themes } from "../../../../styles/themes";
-import { setSelectedScreenLayout } from "../../../../draws/screenLayoutDraw";
+import { setSelectedScreenLayout } from "../../../../draws/ScreenLayoutDraw/screenLayoutDraw";
 
 
 const tabOptions = ['Layouts', 'Configurations']

@@ -2,14 +2,19 @@ import { Container, Options, SelectedOption } from "./styled";
 
 import { RiLayout2Line } from "react-icons/ri"
 import { BsPalette } from "react-icons/bs"
+
 import { MdOutlineArrowBackIosNew } from "react-icons/md"
+import {FaShapes} from "react-icons/fa"
+
 import { ScreenLayout } from "../ScreenLayout";
 import { useState } from "react";
 import { Styles } from "../Styles";
+import { Shapes } from "../Shapes";
 
 interface optionSelected {
     screenLayout: boolean
     styles: boolean
+    shapes: boolean
 }
 
 export function EditVideoSideBar() {
@@ -17,7 +22,8 @@ export function EditVideoSideBar() {
     const [titleOption, setTitleOption] = useState('')
     const [optionSelected, setOptionSelected] = useState<optionSelected>({
         screenLayout: false,
-        styles: false
+        styles: false,
+        shapes: false
     })
 
     function handleOpenSideBarScreenLayout() {
@@ -32,6 +38,13 @@ export function EditVideoSideBar() {
         setIsSideBarOpen(true)
         setTitleOption('Styles')
         setOptionSelected({ ...optionSelected, styles: true })
+    }
+
+    function handleOpenSideBarShapes() {
+        setAllOptionFalse()
+        setIsSideBarOpen(true)
+        setTitleOption('Shapes')
+        setOptionSelected({ ...optionSelected, shapes: true })
     }
 
     function setAllOptionFalse() {
@@ -65,6 +78,14 @@ export function EditVideoSideBar() {
                     <BsPalette fontSize='1.5rem' />
                     <span>Styles</span>
                 </div>
+
+                <div
+                    className={`icons ${optionSelected.shapes ? 'active' : ''}`}
+                    onClick={handleOpenSideBarShapes}
+                >
+                    <FaShapes fontSize='1.5rem' />
+                    <span>Shapes</span>
+                </div>
             </Options>
 
             {isSideBarOpen && (
@@ -76,6 +97,8 @@ export function EditVideoSideBar() {
 
                     {optionSelected?.screenLayout && (<ScreenLayout />)}
                     {optionSelected?.styles && (<Styles/>)}
+                    {optionSelected?.shapes && (<Shapes/>)}
+
                 </SelectedOption>
             )}
 

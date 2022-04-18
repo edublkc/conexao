@@ -1,4 +1,4 @@
-import { canvasHeight, canvasWidth, setScreenLayoutPositions } from "./positionsDraw";
+import { canvasHeight, canvasWidth, setScreenLayoutPositions } from "../positionsDraw";
 
 export function setSelectedScreenLayout(layout: string) {
     switch (layout) {

@@ -3,23 +3,26 @@ import { Container, MainVideo, Options, Thumbs, Videos, Wrapp } from "./styled"
 
 import { MdOutlineScreenShare } from "react-icons/md"
 import { BsCameraVideoFill, BsCameraVideoOffFill, BsMicFill, BsMicMuteFill } from "react-icons/bs"
-import { isChatMessageSelected,displayMessage, displayName} from "../../../context/canvasContext"
 
 import { themes } from "../../../styles/themes"
 
-
 import { useCanvasContext } from "../../../context/canvasContext"
 import { BroadcastInformationsContext } from "../../../context/broadcastInformationsContext"
-import { setSelectedScreenLayout } from "../../../draws/screenLayoutDraw"
-import { canvasReference, drawInCanvas } from "../../../draws/renderDraw"
-import { stylesDraw, StylesProps } from "../../../draws/stylesDraw"
+import { setSelectedScreenLayout } from "../../../draws/ScreenLayoutDraw/screenLayoutDraw"
+import { drawInCanvas } from "../../../draws/renderDraw"
+import { stylesDraw, StylesProps } from "../../../draws/StylesDraw/stylesDraw"
+
+import { Stage, Layer, Rect, Circle } from 'react-konva';
+import { setCanvasReferenceInShapeEvents } from "../../../draws/ShapesDraw/shapesDraw"
+
 
 export let canvasContext: CanvasRenderingContext2D | null
 
-export function MainScreen() {
-    const { broadcastInformations} = useContext(BroadcastInformationsContext)
 
-    const {devices,nameToBeDisplayed,setCanvasStream: setCanvasStreamContext,setAudioStream: setAudioStreamContext} = useCanvasContext()
+export function MainScreen() {
+    const { broadcastInformations } = useContext(BroadcastInformationsContext)
+
+    const { devices, nameToBeDisplayed, setCanvasStream: setCanvasStreamContext, setAudioStream: setAudioStreamContext } = useCanvasContext()
 
 
     const canvasRef = useRef<HTMLCanvasElement>({} as HTMLCanvasElement)
@@ -37,16 +40,18 @@ export function MainScreen() {
 
     const [isScreenSharing, setIsScreenSharing] = useState(false)
 
-    useEffect(()=>{
+
+    useEffect(() => {
         let styles = localStorage.getItem('stylesDraw');
-        if(styles !== null){
+        if (styles !== null) {
             let styleObj: StylesProps = JSON.parse(styles)
             stylesDraw(styleObj)
         }
-    },[])
+    }, [])
 
     useEffect(() => {
         canvasContext = canvasRef.current.getContext('2d')
+
         getCameraDevice()
         getAudioDevice()
     }, [])
@@ -108,8 +113,8 @@ export function MainScreen() {
     }
 
     function update(video: any, ctx: CanvasRenderingContext2D | null, screen?: any) {
-        drawInCanvas(video,ctx,screen,canvasRef)
-        window.requestAnimationFrame(()=> update(video,ctx,screen))
+        drawInCanvas(video, ctx, screen, canvasRef)
+        //window.requestAnimationFrame(()=> update(video,ctx,screen))
         //setTimeout(update, 15, video, ctx, screen)
     }
 
@@ -126,12 +131,13 @@ export function MainScreen() {
 
         camRef.current.addEventListener('play', () => {
             update(camRef.current, canvasContext, shareScreenRef.current)
-            
+            setCanvasReferenceInShapeEvents(canvasRef)
         })
+
 
     }
 
-    
+
     function toggleCamera() {
         setIsCameraStop(!isCameraStop)
         handleStopVideo()
@@ -177,7 +183,7 @@ export function MainScreen() {
     }
 
     function debug() {
-        console.log(canvasContext?.measureText('Eduardo mota').width)
+
     }
 
 
@@ -194,10 +200,13 @@ export function MainScreen() {
 
                     <canvas id="canva" ref={canvasRef} width="700" height="393"></canvas>
 
+
                 </MainVideo>
             </Wrapp>
 
+
             <Videos>
+                <button onClick={debug}>Add square</button>
                 <Options>
                     <button onClick={toggleCamera}>
                         {isCameraStop ? (<BsCameraVideoOffFill color={themes.colors.error} />) : (<BsCameraVideoFill />)}
@@ -221,7 +230,7 @@ export function MainScreen() {
 
 
                     <div className="thumbnail" onClick={() => setSelectedScreenLayout('screenOnly')} style={{ display: `${isScreenSharing ? 'block' : 'none'}` }}>
-                        <video ref={shareScreenRef} autoPlay muted id="camera" />
+                        <video ref={shareScreenRef} autoPlay muted id="screen" />
                     </div>
                 </Thumbs>
 
@@ -231,3 +240,4 @@ export function MainScreen() {
     )
 }
 
+// 

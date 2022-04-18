@@ -2,15 +2,17 @@ import { canvasContext } from "../components/Studio Components/ST MainScreen"
 import { hostNameToBeDisplayed } from "../components/Studio Components/ST SelectDevices"
 import { isChatMessageSelected } from "../context/canvasContext"
 import { themes } from "../styles/themes"
-import { drawMessage } from "./chatMessagesDraw"
+import { drawMessage } from "./ChatDraw/chatMessagesDraw"
 import { cameraX0, cameraX1, cameraY0, cameraY1, screenX0, screenX1, screenY0, screenY1 } from "./positionsDraw"
 import { canvasHeight, canvasWidth } from "./positionsDraw"
-import { stylesCanvasDraw } from "./stylesDraw"
+import { shapes } from "./ShapesDraw/shapesDraw"
+import { stylesCanvasDraw } from "./StylesDraw/stylesDraw"
 
 export let canvasReference: React.MutableRefObject<HTMLCanvasElement>
 
 export function drawInCanvas(video: any, ctx: CanvasRenderingContext2D | null, screen: any,canvasReferenceParms: React.MutableRefObject<HTMLCanvasElement>) {
     canvasReference = canvasReferenceParms
+    
 
     ctx?.clearRect(0,0,canvasWidth,canvasHeight)
 
@@ -40,11 +42,21 @@ export function drawInCanvas(video: any, ctx: CanvasRenderingContext2D | null, s
         }else{
             renderHostName()
         }
-        
-    }
-    
 
-    setTimeout(drawInCanvas, 15, video, ctx, screen)
+    }
+
+    if(ctx){
+        for(let i in shapes){
+            ctx.fillStyle = shapes[i].color
+            ctx.fillRect(shapes[i].x,shapes[i].y,shapes[i].width,shapes[i].height)
+        }
+    }
+  
+    
+    
+    window.requestAnimationFrame(() => drawInCanvas(video,ctx,screen,canvasReferenceParms))
+
+//    setTimeout(drawInCanvas, 15, video, ctx, screen)
 }
 
 

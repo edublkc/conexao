@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
-import { stylesDraw, StylesProps } from "../../../../draws/stylesDraw";
+import { stylesDraw, StylesProps } from "../../../../draws/StylesDraw/stylesDraw";
 import { TabMenu } from "../../../TabMenu";
 import { Container, Content } from "./styled";
 

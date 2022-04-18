@@ -1,9 +1,9 @@
-import { allChatMessages } from "../components/Studio Components/ST Chat";
-import { canvasContext } from "../components/Studio Components/ST MainScreen";
-import { displayMessage, displayName } from "../context/canvasContext";
-import { themes } from "../styles/themes";
-import {  canvasHeight } from "./positionsDraw";
-import { stylesCanvasDraw } from "./stylesDraw";
+import { allChatMessages } from "../../components/Studio Components/ST Chat";
+import { canvasContext } from "../../components/Studio Components/ST MainScreen";
+import { displayMessage, displayName } from "../../context/canvasContext";
+import { themes } from "../../styles/themes";
+import {  canvasHeight } from "../positionsDraw";
+import { stylesCanvasDraw } from "../StylesDraw/stylesDraw";
 
 
 export function drawMessage() {
