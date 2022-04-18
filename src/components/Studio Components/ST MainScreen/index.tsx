@@ -12,8 +12,7 @@ import { setSelectedScreenLayout } from "../../../draws/ScreenLayoutDraw/screenL
 import { drawInCanvas } from "../../../draws/renderDraw"
 import { stylesDraw, StylesProps } from "../../../draws/StylesDraw/stylesDraw"
 
-import { Stage, Layer, Rect, Circle } from 'react-konva';
-import { setCanvasReferenceInShapeEvents } from "../../../draws/ShapesDraw/shapesDraw"
+import { setCanvasReferenceInShapeMouseEvents } from "../../../draws/ShapesDraw/shapesMouseEventsDraw"
 
 
 export let canvasContext: CanvasRenderingContext2D | null
@@ -131,7 +130,7 @@ export function MainScreen() {
 
         camRef.current.addEventListener('play', () => {
             update(camRef.current, canvasContext, shareScreenRef.current)
-            setCanvasReferenceInShapeEvents(canvasRef)
+            setCanvasReferenceInShapeMouseEvents(canvasRef)
         })
 
 
@@ -206,7 +205,6 @@ export function MainScreen() {
 
 
             <Videos>
-                <button onClick={debug}>Add square</button>
                 <Options>
                     <button onClick={toggleCamera}>
                         {isCameraStop ? (<BsCameraVideoOffFill color={themes.colors.error} />) : (<BsCameraVideoFill />)}

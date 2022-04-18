@@ -6,6 +6,7 @@ import { drawMessage } from "./ChatDraw/chatMessagesDraw"
 import { cameraX0, cameraX1, cameraY0, cameraY1, screenX0, screenX1, screenY0, screenY1 } from "./positionsDraw"
 import { canvasHeight, canvasWidth } from "./positionsDraw"
 import { shapes } from "./ShapesDraw/shapesDraw"
+import { resizableSquare } from "./ShapesDraw/shapesMouseEventsDraw"
 import { stylesCanvasDraw } from "./StylesDraw/stylesDraw"
 
 export let canvasReference: React.MutableRefObject<HTMLCanvasElement>
@@ -41,18 +42,18 @@ export function drawInCanvas(video: any, ctx: CanvasRenderingContext2D | null, s
             drawMessage()
         }else{
             renderHostName()
+
+            if(resizableSquare){
+                canvasContext.fillStyle = "blue"
+                canvasContext.fillRect(resizableSquare.x,resizableSquare.y,resizableSquare.w,resizableSquare.h)
+            }
+
+            renderShapes()
+           
         }
 
     }
 
-    if(ctx){
-        for(let i in shapes){
-            ctx.fillStyle = shapes[i].color
-            ctx.fillRect(shapes[i].x,shapes[i].y,shapes[i].width,shapes[i].height)
-        }
-    }
-  
-    
     
     window.requestAnimationFrame(() => drawInCanvas(video,ctx,screen,canvasReferenceParms))
 
@@ -71,5 +72,13 @@ function renderHostName(){
         canvasContext.fillStyle = stylesCanvasDraw.nameTextColor;
         canvasContext.fillText(hostNameToBeDisplayed, 5, canvasHeight - 20)
     }
-    
+}
+
+function renderShapes(){
+    if(canvasContext){
+        for(let i in shapes){
+            canvasContext.fillStyle = shapes[i].color
+            canvasContext.fillRect(shapes[i].x,shapes[i].y,shapes[i].width,shapes[i].height)
+        }
+    }
 }
