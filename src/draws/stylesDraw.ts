@@ -1,4 +1,4 @@
-interface Props{
+export interface StylesProps{
     nameTextColor: string
     nameBackgroundColor: string
 
@@ -12,7 +12,7 @@ interface Props{
 }
 
 
-export function stylesDraw(props: Props){
+export function stylesDraw(props: StylesProps){
     stylesCanvasDraw.nameTextColor = props.nameTextColor
     stylesCanvasDraw.nameBackgroundColor = props.nameBackgroundColor
 
@@ -25,7 +25,7 @@ export function stylesDraw(props: Props){
     stylesCanvasDraw.backgroundColor = props.backgroundColor
 }
 
-export const stylesCanvasDraw:Props = {
+export const stylesCanvasDraw:StylesProps = {
     nameTextColor: '#ffffff',
     nameBackgroundColor: '#000000',
     chatNameTextColor: '#ffffff',

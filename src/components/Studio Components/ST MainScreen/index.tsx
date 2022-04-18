@@ -12,6 +12,7 @@ import { useCanvasContext } from "../../../context/canvasContext"
 import { BroadcastInformationsContext } from "../../../context/broadcastInformationsContext"
 import { setSelectedScreenLayout } from "../../../draws/screenLayoutDraw"
 import { canvasReference, drawInCanvas } from "../../../draws/renderDraw"
+import { stylesDraw, StylesProps } from "../../../draws/stylesDraw"
 
 export let canvasContext: CanvasRenderingContext2D | null
 
@@ -35,6 +36,14 @@ export function MainScreen() {
     const [isDevicesConfigOpen, setIsDevicesConfigOpen] = useState(false)
 
     const [isScreenSharing, setIsScreenSharing] = useState(false)
+
+    useEffect(()=>{
+        let styles = localStorage.getItem('stylesDraw');
+        if(styles !== null){
+            let styleObj: StylesProps = JSON.parse(styles)
+            stylesDraw(styleObj)
+        }
+    },[])
 
     useEffect(() => {
         canvasContext = canvasRef.current.getContext('2d')
@@ -100,8 +109,8 @@ export function MainScreen() {
 
     function update(video: any, ctx: CanvasRenderingContext2D | null, screen?: any) {
         drawInCanvas(video,ctx,screen,canvasRef)
-        //window.requestAnimationFrame(()=> update(video,ctx,screen))
-        setTimeout(update, 15, video, ctx, screen)
+        window.requestAnimationFrame(()=> update(video,ctx,screen))
+        //setTimeout(update, 15, video, ctx, screen)
     }
 
 

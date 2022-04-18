@@ -24,9 +24,9 @@ padding-bottom:1rem;
 `
 
 export const Content = styled.div`
-margin-top: 1rem;
+
 height: fit-content;
-padding: 0 0.5rem;
+padding: 0.5rem 0.5rem;
 
 
 .contentTitle{
@@ -39,15 +39,60 @@ section{
 }
 
 .brandColorSection{
-    input[type=color]{
+
+    .colorsInuput{
+    display: flex;
+    
+    gap: 5px;
+
+    div{
         width: 50px;
         height: 50px;
-        background-color: transparent;
-        outline: none;
-        cursor: pointer;
-        border-radius: 5px;
+        border-radius: 50%;
+        overflow: hidden;
     }
 
+    input[type="color"]{
+        -webkit-appearance: none;
+        padding: 0;
+        border: none;
+        border-radius: 10px;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+}
+    input[type="color"]::-webkit-color-swatch {
+        border: none;
+        border-radius: 10px;
+        padding: 0;
+}
+    input[type="color"]::-webkit-color-swatch-wrapper {
+        border: none;
+         border-radius: 10px;
+        padding: 0;
+}
+}
+  
+}
+
+.saveSection{
+    display: flex;
+    justify-content: flex-end;
+
+    button{
+        background-color: ${themes.colors.pink[200]};
+        width: 80px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        transition: 0.2s;
+
+        &:hover{
+            filter: brightness(0.8);
+        }
+    }
 }
 
 `
