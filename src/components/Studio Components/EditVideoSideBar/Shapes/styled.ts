@@ -39,11 +39,11 @@ section{
     margin-bottom: 1rem;
 }
 
-.squares{
+.Allshapes{
     .fillSquare{
         width: 80px;
         height: 80px;
-        background-color: ${themes.colors.pink[200]};
+        background-color: ${themes.colors.blueGray[100]};
         cursor: pointer;
     }
 }

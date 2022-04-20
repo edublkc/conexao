@@ -19,7 +19,7 @@
 - Criar funcionalidades para a side bar[]
     - Layouts[x]
     - Cores[x]
-    - Adicionar Konvas e algumas possibilidades[]
+    - Adicionar Elementos (Quadrados, circulo,triangulo,seta,outros elementos)[]
     - Ajustar tamanho da camera[]
 
 - Adicionar marca d'agua do Connection []

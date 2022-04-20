@@ -11,10 +11,10 @@ import { stylesCanvasDraw } from "./StylesDraw/stylesDraw"
 
 export let canvasReference: React.MutableRefObject<HTMLCanvasElement>
 
+
 export function drawInCanvas(video: any, ctx: CanvasRenderingContext2D | null, screen: any,canvasReferenceParms: React.MutableRefObject<HTMLCanvasElement>) {
     canvasReference = canvasReferenceParms
     
-
     ctx?.clearRect(0,0,canvasWidth,canvasHeight)
 
     if (ctx) {
@@ -42,19 +42,12 @@ export function drawInCanvas(video: any, ctx: CanvasRenderingContext2D | null, s
             drawMessage()
         }else{
             renderHostName()
-
-            if(resizableSquare){
-                canvasContext.fillStyle = "blue"
-                canvasContext.fillRect(resizableSquare.x,resizableSquare.y,resizableSquare.w,resizableSquare.h)
-            }
-
             renderShapes()
-           
+            renderResizibleSquare()
         }
 
     }
 
-    
     window.requestAnimationFrame(() => drawInCanvas(video,ctx,screen,canvasReferenceParms))
 
 //    setTimeout(drawInCanvas, 15, video, ctx, screen)
@@ -80,5 +73,30 @@ function renderShapes(){
             canvasContext.fillStyle = shapes[i].color
             canvasContext.fillRect(shapes[i].x,shapes[i].y,shapes[i].width,shapes[i].height)
         }
+    }
+}
+
+function renderResizibleSquare(){
+    if(resizableSquare && canvasContext){
+        canvasContext.strokeStyle  =  themes.colors.pink[500]
+        canvasContext.lineWidth = 2;
+        canvasContext.strokeRect(resizableSquare.x,resizableSquare.y,resizableSquare.w,resizableSquare.h)
+
+
+        //CORNERS RESIZER
+        /*
+        canvasContext.strokeStyle  =  themes.colors.pink[500]
+        canvasContext.fillStyle = "white"
+        canvasContext.fillRect(resizableSquare.corners.topLeft.x,resizableSquare.corners.topLeft.y,resizableSquare.corners.topLeft.width,resizableSquare.corners.topLeft.height)
+
+        canvasContext.fillStyle = "white"
+        canvasContext.fillRect(resizableSquare.corners.bottomLeft.x,resizableSquare.corners.bottomLeft.y,resizableSquare.corners.bottomLeft.width,resizableSquare.corners.bottomLeft.height)
+
+        canvasContext.fillStyle = "white"
+        canvasContext.fillRect(resizableSquare.corners.topRight.x,resizableSquare.corners.topRight.y,resizableSquare.corners.topRight.width,resizableSquare.corners.bottomLeft.height)
+
+        canvasContext.fillStyle = "white"
+        canvasContext.fillRect(resizableSquare.corners.bottomRight.x,resizableSquare.corners.bottomRight.y,resizableSquare.corners.bottomRight.width,resizableSquare.corners.bottomLeft.height)
+        */
     }
 }

@@ -13,6 +13,7 @@ import { drawInCanvas } from "../../../draws/renderDraw"
 import { stylesDraw, StylesProps } from "../../../draws/StylesDraw/stylesDraw"
 
 import { setCanvasReferenceInShapeMouseEvents } from "../../../draws/ShapesDraw/shapesMouseEventsDraw"
+import { setCanvasReferenceInDeleteShape } from "../../../draws/ShapesDraw/deleteShapeDraw"
 
 
 export let canvasContext: CanvasRenderingContext2D | null
@@ -131,6 +132,7 @@ export function MainScreen() {
         camRef.current.addEventListener('play', () => {
             update(camRef.current, canvasContext, shareScreenRef.current)
             setCanvasReferenceInShapeMouseEvents(canvasRef)
+            setCanvasReferenceInDeleteShape(canvasRef)
         })
 
 
