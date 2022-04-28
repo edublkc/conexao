@@ -26,7 +26,7 @@
         - Roda pé com informaçoes []
         - Overlay []
 
-    - Ajustar tamanho da camera[]
+    - Ajustar tamanho da camera[x]
     - Criar temas de cores []
 
 - Adicionar marca d'agua do Connection []

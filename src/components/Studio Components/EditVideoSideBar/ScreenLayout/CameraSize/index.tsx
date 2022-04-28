@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { changeCameraSize } from "../../../../../draws/ScreenLayoutDraw/screenLayoutDraw";
+import { changeCameraSize, currentCameraSize } from "../../../../../draws/ScreenLayoutDraw/screenLayoutDraw";
 import { Container } from "./styled";
 
 export function CameraSize(){
-    const [cameraSize,setCameraSize] = useState('small')
+    const [cameraSize,setCameraSize] = useState(currentCameraSize.currentCameraSize)
 
    
 
