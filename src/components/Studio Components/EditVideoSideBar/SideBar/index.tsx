@@ -79,13 +79,7 @@ export function EditVideoSideBar() {
                     <span>Styles</span>
                 </div>
 
-                <div
-                    className={`icons ${optionSelected.shapes ? 'active' : ''}`}
-                    onClick={handleOpenSideBarShapes}
-                >
-                    <FaShapes fontSize='1.5rem' />
-                    <span>Shapes</span>
-                </div>
+              
             </Options>
 
             {isSideBarOpen && (
@@ -97,7 +91,6 @@ export function EditVideoSideBar() {
 
                     {optionSelected?.screenLayout && (<ScreenLayout />)}
                     {optionSelected?.styles && (<Styles/>)}
-                    {optionSelected?.shapes && (<Shapes/>)}
 
                 </SelectedOption>
             )}

@@ -9,6 +9,7 @@ interface RectProperties{
     x?: number
     y?: number
     color?: string
+    alpha?: number
 }
 
 export class Rect{
@@ -22,6 +23,8 @@ export class Rect{
         x: number,
         y: number
     }
+    alpha: number
+
 
     constructor(properties: RectProperties){
         this.id = properties.id
@@ -34,6 +37,7 @@ export class Rect{
             x: 0,
             y: 0
         }
+        this.alpha = properties.alpha || 1
     }
 }
 

@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useContext, useState } from "react";
+import { Rect } from "../draws/ShapesDraw/shapesDraw";
 
 interface CanvasContextProviderProps {
     children: ReactNode
@@ -25,6 +26,9 @@ interface CanvasContextData {
     changeSelectedChatMessage: (name: string, message: string, etag: string) => void
 
     chatSpecificMessageTag: string
+
+    isSomeSelectedShape:Rect | null
+    setIsSomeSelectedShape: React.Dispatch<React.SetStateAction<Rect | null>>
 }
 
 export const CanvasContext = createContext({} as CanvasContextData)
@@ -44,6 +48,8 @@ export function CanvasContextProvider({ children }: CanvasContextProviderProps) 
     const [audioStream, setAudioStream] = useState({} as MediaStream)
 
     const [chatSpecificMessageTag,setChatSpecificMessageTag] = useState('')
+
+    const [isSomeSelectedShape,setIsSomeSelectedShape] = useState<Rect | null>(null)
 
     function changeSelectedChatMessage(name: string, message: string, etag: string) {
         if (chatETag === etag) {
@@ -73,7 +79,9 @@ export function CanvasContextProvider({ children }: CanvasContextProviderProps) 
             audioStream,
             setAudioStream,
             changeSelectedChatMessage,
-            chatSpecificMessageTag
+            chatSpecificMessageTag,
+            isSomeSelectedShape,
+            setIsSomeSelectedShape
         }}>
 
             {children}

@@ -12,10 +12,10 @@ import { stylesCanvasDraw } from "./StylesDraw/stylesDraw"
 export let canvasReference: React.MutableRefObject<HTMLCanvasElement>
 
 
-export function drawInCanvas(video: any, ctx: CanvasRenderingContext2D | null, screen: any,canvasReferenceParms: React.MutableRefObject<HTMLCanvasElement>) {
+export function drawInCanvas(video: any, ctx: CanvasRenderingContext2D | null, screen: any, canvasReferenceParms: React.MutableRefObject<HTMLCanvasElement>) {
     canvasReference = canvasReferenceParms
-    
-    ctx?.clearRect(0,0,canvasWidth,canvasHeight)
+
+    ctx?.clearRect(0, 0, canvasWidth, canvasHeight)
 
     if (ctx) {
         ctx.fillStyle = stylesCanvasDraw.backgroundColor
@@ -38,9 +38,9 @@ export function drawInCanvas(video: any, ctx: CanvasRenderingContext2D | null, s
 
 
     if (canvasContext) {
-        if(isChatMessageSelected){
+        if (isChatMessageSelected) {
             drawMessage()
-        }else{
+        } else {
             renderHostName()
             renderShapes()
             renderResizibleSquare()
@@ -48,15 +48,15 @@ export function drawInCanvas(video: any, ctx: CanvasRenderingContext2D | null, s
 
     }
 
-    window.requestAnimationFrame(() => drawInCanvas(video,ctx,screen,canvasReferenceParms))
+    window.requestAnimationFrame(() => drawInCanvas(video, ctx, screen, canvasReferenceParms))
 
-//    setTimeout(drawInCanvas, 15, video, ctx, screen)
+    //    setTimeout(drawInCanvas, 15, video, ctx, screen)
 }
 
 
 
-function renderHostName(){
-    if(canvasContext){
+function renderHostName() {
+    if (canvasContext) {
         canvasContext.fillStyle = stylesCanvasDraw.nameBackgroundColor
 
         canvasContext.fillRect(0, canvasHeight - 40, canvasContext?.measureText(hostNameToBeDisplayed).width + 10, 30);
@@ -67,20 +67,30 @@ function renderHostName(){
     }
 }
 
-function renderShapes(){
-    if(canvasContext){
-        for(let i in shapes){
+function renderShapes() {
+    if (canvasContext) {
+        for (let i in shapes) {
+            canvasContext.globalAlpha = shapes[i].alpha
             canvasContext.fillStyle = shapes[i].color
-            canvasContext.fillRect(shapes[i].x,shapes[i].y,shapes[i].width,shapes[i].height)
+            canvasContext.fillRect(shapes[i].x, shapes[i].y, shapes[i].width, shapes[i].height)
+
+            canvasContext.globalAlpha = 1
+
+            canvasContext.save();
+            canvasContext.scale(1, 3);
+            canvasContext.beginPath();
+            canvasContext.arc(72, 130, 25, 0, 2 * Math.PI);
+            canvasContext.fill();
+            canvasContext.restore();
         }
     }
 }
 
-function renderResizibleSquare(){
-    if(resizableSquare && canvasContext){
-        canvasContext.strokeStyle  =  themes.colors.pink[500]
+function renderResizibleSquare() {
+    if (resizableSquare && canvasContext) {
+        canvasContext.strokeStyle = themes.colors.pink[500]
         canvasContext.lineWidth = 2;
-        canvasContext.strokeRect(resizableSquare.x,resizableSquare.y,resizableSquare.w,resizableSquare.h)
+        canvasContext.strokeRect(resizableSquare.x, resizableSquare.y, resizableSquare.w, resizableSquare.h)
 
 
         //CORNERS RESIZER

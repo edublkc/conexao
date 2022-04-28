@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Rect, shapes } from "./shapesDraw"
 
 interface ResizableSquare {
@@ -77,6 +78,7 @@ export function setCanvasReferenceInShapeMouseEvents(canvasReference: React.Muta
             setResizibleSquareInToCanvas()
         } else {
             resizableSquare = null
+            selectedShape = null
         }
 
 
@@ -103,7 +105,7 @@ export function setCanvasReferenceInShapeMouseEvents(canvasReference: React.Muta
     }
 }
 
-function setResizibleSquareInToCanvas() {
+export function setResizibleSquareInToCanvas() {
     if (selectedShape != null) {
         let resizableSquareHeight = selectedShape.height + 2
         let resizableSquareWidth = selectedShape.width + 2
@@ -155,4 +157,8 @@ function setResizibleSquareInToCanvas() {
 
 export function setResizibleSquareNull(){
     resizableSquare = null
+}
+
+export function setSelectedShapeNull(){
+    selectedShape = null
 }

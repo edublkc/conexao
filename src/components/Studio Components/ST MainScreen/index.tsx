@@ -12,7 +12,7 @@ import { setSelectedScreenLayout } from "../../../draws/ScreenLayoutDraw/screenL
 import { drawInCanvas } from "../../../draws/renderDraw"
 import { stylesDraw, StylesProps } from "../../../draws/StylesDraw/stylesDraw"
 
-import { setCanvasReferenceInShapeMouseEvents } from "../../../draws/ShapesDraw/shapesMouseEventsDraw"
+import { selectedShape, setCanvasReferenceInShapeMouseEvents } from "../../../draws/ShapesDraw/shapesMouseEventsDraw"
 import { setCanvasReferenceInDeleteShape } from "../../../draws/ShapesDraw/deleteShapeDraw"
 
 
@@ -22,7 +22,11 @@ export let canvasContext: CanvasRenderingContext2D | null
 export function MainScreen() {
     const { broadcastInformations } = useContext(BroadcastInformationsContext)
 
-    const { devices, nameToBeDisplayed, setCanvasStream: setCanvasStreamContext, setAudioStream: setAudioStreamContext } = useCanvasContext()
+    const { devices, 
+        nameToBeDisplayed, 
+        setCanvasStream: setCanvasStreamContext, 
+        setAudioStream: setAudioStreamContext,
+        setIsSomeSelectedShape} = useCanvasContext()
 
 
     const canvasRef = useRef<HTMLCanvasElement>({} as HTMLCanvasElement)
@@ -70,7 +74,7 @@ export function MainScreen() {
                 deviceId: devices.camId,
                 width: { min: 100, ideal: 1280, max: 1920 },
                 height: { min: 100, ideal: 720, max: 1080 },
-                frameRate: { ideal: 15 },
+                frameRate: { ideal: 30 },
                 facingMode: "environment"
             }
         };
@@ -183,9 +187,28 @@ export function MainScreen() {
         }
     }
 
+    window.addEventListener('keydown',(e)=>{
+        if(e.key === "Delete" || e.keyCode === 46){
+            checkIfHasSomeShapeSelected()
+        }
+    })
+
+
+   
+   
+    function checkIfHasSomeShapeSelected(){
+        if(selectedShape){
+            console.log('to caindo aqui')
+            setIsSomeSelectedShape(selectedShape)
+        }else if(selectedShape == null){
+            setIsSomeSelectedShape(null)
+        }
+    }
+
     function debug() {
 
     }
+
 
 
 
@@ -199,7 +222,7 @@ export function MainScreen() {
                         <h1>{broadcastInformations.title}</h1>
                     </header>
 
-                    <canvas id="canva" ref={canvasRef} width="700" height="393"></canvas>
+                    <canvas id="canva" ref={canvasRef} width="700" height="393" onClick={checkIfHasSomeShapeSelected}></canvas>
 
 
                 </MainVideo>
