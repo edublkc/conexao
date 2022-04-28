@@ -44,8 +44,8 @@ section{
     display: flex;
     
     gap: 5px;
-
-    div{
+}
+div{
         width: 50px;
         height: 50px;
         border-radius: 50%;
@@ -71,8 +71,6 @@ section{
          border-radius: 10px;
         padding: 0;
 }
-}
-  
 }
 
 .saveSection{
