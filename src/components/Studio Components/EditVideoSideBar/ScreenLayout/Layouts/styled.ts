@@ -20,8 +20,8 @@ export const ScreenLayoutContainer = styled.div`
     height: 60.75px;
     
     border-radius: 2px;
-    background-color: #fff;
-    padding: 1px;
+    background-color: #7A7575;
+    padding: 2px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -36,9 +36,26 @@ export const ScreenLayoutContainer = styled.div`
         border: 2px solid ${themes.colors.pink[500]};
     }
 
+    img{
+        width: 20px;
+    }
     
 }
 
+.cameraSquare{
+    background-color: #7A7575;
+    padding: 2px 12px;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 3px;
+    img{
+        width: 10px;
+    }
+}
+
+.backgroundColorScreen{
+    background-color: #fff;
+}
 
 .center{
     display: flex;
@@ -50,43 +67,32 @@ export const ScreenLayoutContainer = styled.div`
     width: 100%;
     height: 100%;
     border-radius: 2px;
-}
+    padding: 3px 3px;
 
-.screenOnly{
-    background-color: ${themes.colors.pink[500]};
 }
 
 .bottomRight{
-    background-color: ${themes.colors.pink[500]};
-    padding: 0 3px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
 }
 
 .bottomLeft{
-    background-color: ${themes.colors.pink[500]};
-    padding: 0 3px;
     display: flex;
     align-items: flex-end;
 }
 
 .topRight{
-    background-color: ${themes.colors.pink[500]};
-    padding: 0 3px;
     display: flex;
     justify-content: flex-end;
 }
 
 .topLeft{
-    background-color: ${themes.colors.pink[500]};
-    padding: 0 3px;
     display: flex;
     align-items: flex-start;
 }
 
 .screen{
-    background-color: ${themes.colors.pink[500]};
     margin-left: 1px;
 }
 

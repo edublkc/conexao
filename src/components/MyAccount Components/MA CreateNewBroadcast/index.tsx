@@ -1,4 +1,4 @@
-import { Container, ModalHeader, ModalPlatforms, ModalForm } from "./styled"
+import { Container, ModalHeader, ModalPlatforms, ModalForm, CreateBroadcastButton } from "./styled"
 import { FormInput } from "../../FormInputs/styled";
 
 import ReactModal from 'react-modal';
@@ -37,14 +37,12 @@ const schema = yup.object({
 
 export function MACreateNewBroadcast() {
     const navigate = useNavigate()
-    const { setBroadcastInformations, setYoutubeBroadcast,platforms} = useContext(BroadcastInformationsContext)
-    
+    const { setBroadcastInformations, setYoutubeBroadcast, platforms, youtubeBroadcast, setPlatform } = useContext(BroadcastInformationsContext)
+
     const { register, handleSubmit, formState: { errors } } = useForm<CreateBroadcastInformations>({
         resolver: yupResolver(schema)
-
     })
 
-    const [somePlatformSelected, setsomePlatformSelected] = useState(false)
     const [isCreateNewBroadcastModalOpen, setIsCreateNewBroadcastModalOpen] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const [platformSelected, setPlatformSelected] = useState<PlatformsSelected>({ 'Youtube': false, 'Twitch': false })
@@ -55,27 +53,38 @@ export function MACreateNewBroadcast() {
 
     function handleCloseCreateNewBroadcastModal() {
         setIsCreateNewBroadcastModalOpen(false)
-        
     }
 
     function handleSelectedPlatform(platform: string) {
         switch (platform) {
             case 'Youtube':
                 setPlatformSelected({ ...platformSelected, Youtube: !platformSelected.Youtube })
+                setPlatform([...platforms.map((value) => {
+                    if (value.platformName === platform) {
+                        value.selected = !value.selected
+                    }
+                    return value
+                })])
+
                 break;
             case 'Twitch':
                 setPlatformSelected({ ...platformSelected, Twitch: !platformSelected.Twitch })
+                setPlatform([...platforms.map((value) => {
+                    if (value.platformName === platform) {
+                        value.selected = !value.selected
+                    }
+                    return value
+                })])
                 break;
         }
     }
 
 
-    function veirfyIfHasSomePlatformSelected(){
+    function veirfyIfHasSomePlatformSelected() {
         const platformValue = Object.values(platformSelected)
-     
-        if(platformValue.some((plat)=> plat === true )){
+        if (platformValue.some((plat) => plat === true)) {
             return true
-        }else{
+        } else {
             return false
         }
     }
@@ -84,12 +93,25 @@ export function MACreateNewBroadcast() {
     async function handleCreateNewBroadcast(values: CreateBroadcastInformations) {
         setBroadcastInformations(values)
         setIsLoading(true)
+
         const res = await handleCreateYoutubeBroadcast(values)
-        setIsLoading(false)
         setYoutubeBroadcast(res)
+
+        setPlatform([...platforms.map((value) => {
+            if (value.platformName === 'Youtube') {
+                value.ingestionUrl = res.youtubeIngestionUrl
+            }
+            return value
+        })])
 
         console.log(res)
 
+        setIsLoading(false)
+        navigate('/settings')
+    }
+
+    function handleCreateTwitchBroadcast(){
+        setIsLoading(true)
         navigate('/settings')
     }
 
@@ -108,43 +130,52 @@ export function MACreateNewBroadcast() {
                     }
 
                     {platforms.map((plat) => {
-                        const platform = plat.platformName
-
                         return (
                             <div onClick={(e) => { handleSelectedPlatform(plat.platformName) }} className={`platform ${(platformSelected as any)[plat.platformName] === true ? 'active' : ''}`} key={plat.platformName} >
                                 <img src={plat.avatar} />
                                 <span className={plat.platformName}>{plat.platformName}</span>
                             </div>
                         )
-
                     })}
                 </ModalPlatforms>
 
                 {veirfyIfHasSomePlatformSelected() &&
-                    <ModalForm onSubmit={handleSubmit(handleCreateNewBroadcast)}>
-                        <FormInput error={errors.title} dark={true} label="Título"  placeholder="Digite um título para sua transmissão" disabled={isLoading} {...register('title')} />
+                    <>
+                        {platformSelected.Youtube && (
+                            <ModalForm onSubmit={handleSubmit(handleCreateNewBroadcast)}>
+                                <FormInput error={errors.title} dark={true} label="Título" placeholder="Digite um título para sua transmissão" disabled={isLoading} {...register('title')} />
 
-                        <div className="description">
-                            <label>Descrição</label>
-                            <textarea placeholder="Digite uma descrição para sua transmissão" disabled={isLoading}  {...register('description')}></textarea>
-                            
-                        </div>
+                                <div className="description">
+                                    <label>Descrição</label>
+                                    <textarea placeholder="Digite uma descrição para sua transmissão" disabled={isLoading}  {...register('description')}></textarea>
 
-                        <div className="privacity">
-                            <label>Privacidade</label>
-                            <select disabled={isLoading} {...register('privacity')}>
-                                <option value='public'>Público</option>
-                                <option value="unlisted">Não listado</option>
-                                <option value="private">Privado</option>
-                            </select>
-                        </div>
+                                </div>
 
-                        <button type="submit" disabled={isLoading}>
-                            {isLoading && <SyncLoader color={'#fff'} loading={isLoading} size={5} />}
-                            {!isLoading && 'Criar transmissão'}
-                        </button>
+                                <div className="privacity">
+                                    <label>Privacidade</label>
+                                    <select disabled={isLoading} {...register('privacity')}>
+                                        <option value='public'>Público</option>
+                                        <option value="unlisted">Não listado</option>
+                                        <option value="private">Privado</option>
+                                    </select>
+                                </div>
 
-                    </ModalForm>
+                                <CreateBroadcastButton type="submit" disabled={isLoading}>
+                                    {isLoading && <SyncLoader color={'#fff'} loading={isLoading} size={5} />}
+                                    {!isLoading && 'Criar transmissão'}
+                                </CreateBroadcastButton>
+                            </ModalForm>
+                        )}
+
+                        {platformSelected.Twitch && !platformSelected.Youtube && (
+                            <CreateBroadcastButton onClick={handleCreateTwitchBroadcast}>
+                                Criar transmissão
+                            </CreateBroadcastButton>
+                        )}
+
+
+                    </>
+
                 }
 
             </ReactModal>

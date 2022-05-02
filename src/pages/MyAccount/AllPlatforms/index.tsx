@@ -24,7 +24,6 @@ export function AllPlatforms() {
                     
                     <div className="platforms">
                         <MAAddYoutube/>
-                        <MAAddTwitch/>
                     </div>
                 </Content>
             </Wrapper>

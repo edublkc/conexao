@@ -29,8 +29,12 @@ export const Container = styled.div`
         flex-direction: column;
         font-size: 0.75rem;
 
-        .platform{
+        .Youtube{
             color: ${themes.colors.platforms.Youtube};
+        }
+
+        .Twitch{
+            color: ${themes.colors.platforms.twitch}
         }
     }
 

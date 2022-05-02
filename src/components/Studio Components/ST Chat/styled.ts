@@ -41,7 +41,7 @@ padding: 0.5rem;
 
         &:not(.active):hover{
             &::before{
-                content: 'Exibir mensagem';
+                content: 'Show message';
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -68,7 +68,7 @@ padding: 0.5rem;
 
             &:hover{
             &::before{
-                content: 'Remover mensagem';
+                content: 'Remove message';
                 display: flex;
                 align-items: center;
                 justify-content: center;

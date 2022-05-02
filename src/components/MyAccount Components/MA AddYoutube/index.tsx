@@ -18,10 +18,12 @@ export function MAAddYoutube() {
             console.log('AUTENTICAÇÃO----', res)
 
             setPlatform([...platforms,{
-                name: res.Iu.sf,
-                avatar: res.Iu.zN,
-                accessToken: res.wc.access_token,
-                platformName: 'Youtube'
+                name: res.Qu.sf,
+                avatar: res.Qu.MN,
+                accessToken: res.xc.access_token,
+                platformName: 'Youtube',
+                ingestionUrl: '',
+                selected: false
             }])
         })
     }

@@ -119,7 +119,9 @@ export const ModalForm = styled.form`
         }
     }
 
-    button{
+`
+
+export const CreateBroadcastButton = styled.button`
         display: inline-block;
         background-color:${themes.colors.pink[500]};
         border-radius: 0.3125rem;
@@ -128,10 +130,8 @@ export const ModalForm = styled.form`
         font-weight: 700;
         font-size: 1rem;
         transition:0.2s ;
-        height: 3rem;
 
         &:hover{
             filter:brightness(0.9);
         }
-    }
 `

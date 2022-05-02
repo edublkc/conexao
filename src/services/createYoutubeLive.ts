@@ -19,6 +19,7 @@ let streamId: string
 let youtubeIngestionUrl:string
 let youtubeStreamName:string
 let livechatid: string
+let rtmpUrl: string
 
 const streamInformations = {} as streamInformations
 
@@ -83,13 +84,13 @@ async function handleCreateStream(broadcastInformations:CreateBroadcastInformati
         })
 
     streamId = await res.result.id
-    youtubeIngestionUrl = await res.result.cdn.ingestionInfo.ingestionAddress
+    rtmpUrl = await res.result.cdn.ingestionInfo.ingestionAddress
     youtubeStreamName = await res.result.cdn.ingestionInfo.streamName
 
     streamInformations.streamId = streamId
-    streamInformations.youtubeIngestionUrl = youtubeIngestionUrl
+    streamInformations.rtmpUrl = rtmpUrl
     streamInformations.youtubeStreamName = youtubeStreamName
-    streamInformations.rtmpUrl = youtubeIngestionUrl + '/' + youtubeStreamName
+    streamInformations.youtubeIngestionUrl = rtmpUrl + '/' + youtubeStreamName
 
     return await handlebindBroadcast(broadcastInformations)
 

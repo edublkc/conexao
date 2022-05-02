@@ -8,9 +8,11 @@ interface PlatformsContextProvider {
 
 export interface Platform {
     name: string
-    acessToken: string,
+    accessToken: string,
     avatar: string,
-    platformName: string
+    platformName: string,
+    selected: boolean,
+    ingestionUrl: string
 }
 
 interface BroadcastInformations {
@@ -21,23 +23,34 @@ interface BroadcastInformations {
 
 type PlatformsContext = {
     platforms: Platform[]
-    setPlatform: React.Dispatch<any>
+    setPlatform: React.Dispatch<Platform[]>
 
     broadcastInformations: BroadcastInformations,
     setBroadcastInformations: React.Dispatch<any>,
 
     youtubeBroadcast: streamInformations,
     setYoutubeBroadcast: React.Dispatch<any>
+
+    twitchBroadcast: TwitchBroadcast
+    setTwitchBroadcast: React.Dispatch<TwitchBroadcast>
+}
+
+interface TwitchBroadcast {
+    rtmpUrl: string
+    streamKey: string
+    ingestionUrl: string
 }
 
 export const BroadcastInformationsContext = createContext({} as PlatformsContext)
 
 export function BroadcastInformationsContextProvider({ children }: PlatformsContextProvider) {
-    const [platforms, setPlatform] = useState([])
+    const [platforms, setPlatform] = useState([] as Platform[])
 
     const [broadcastInformations, setBroadcastInformations] = useState({} as BroadcastInformations)
 
     const [youtubeBroadcast, setYoutubeBroadcast] = useState({} as streamInformations)
+    const [twitchBroadcast,setTwitchBroadcast] = useState({} as TwitchBroadcast)
+
 
     return (
         <BroadcastInformationsContext.Provider value={
@@ -47,7 +60,9 @@ export function BroadcastInformationsContextProvider({ children }: PlatformsCont
                 broadcastInformations,
                 setBroadcastInformations,
                 youtubeBroadcast,
-                setYoutubeBroadcast
+                setYoutubeBroadcast,
+                twitchBroadcast,
+                setTwitchBroadcast
             }}>
             {children}
         </BroadcastInformationsContext.Provider>

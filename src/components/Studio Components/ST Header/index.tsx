@@ -2,16 +2,16 @@ import { StartStreamButton } from "../ST StartStreamButton";
 import { Container } from "./styled";
 
 
-export function STHeader(){
-    return(
+export function STHeader() {
+    return (
         <Container>
             <h1>
                 CONEXÃO
-             </h1>
+            </h1>
 
-             <div className="options">
-                 
-             </div>
+            <div className="options">
+                <StartStreamButton />
+            </div>
         </Container>
     )
 }

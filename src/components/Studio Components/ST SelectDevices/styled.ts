@@ -44,6 +44,10 @@ export const Container = styled.div`
                 background-color: #121212;
                 border-radius: 10px;
                 position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
             }
 
             video{

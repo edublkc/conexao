@@ -19,7 +19,7 @@ interface StartStreamButtonProps{
 let mediaRecorder: MediaRecorder
 
 export function StartStreamButton(){
-    const {youtubeBroadcast} = useContext(BroadcastInformationsContext)
+    const {youtubeBroadcast, platforms} = useContext(BroadcastInformationsContext)
     const {canvasStream,audioStream} = useCanvasContext()
     const [isLive,setIsLive] = useState(false)
     let isLiveEmit = false
@@ -46,7 +46,7 @@ export function StartStreamButton(){
         setIsLive(true)
         isLiveEmit = true
 
-        socket.emit('config_rtmpDestination', youtubeBroadcast.rtmpUrl)//youtubeBroadcast.rtmpUrl
+        socket.emit('config_rtmpDestination', platforms)//youtubeBroadcast.rtmpUrl
         socket.emit('start', 'start')
         
         if(canvasStream){
@@ -58,25 +58,23 @@ export function StartStreamButton(){
     
             mediaRecorder.ondataavailable = function (e) {
                 if(!isLiveEmit){
-                    console.log('to caindo no primeiro')
                     return
                 }
-                console.log('to caindo no segundo')
                 socket.emit("binarystream", e.data);
             }
     
             
             mediaRecorder.start(10);
-            console.log(mediaRecorder)
         }
     }
 
     const endLive = async () =>{
         canvasStream.getTracks().forEach( track => track.stop())
-        console.log(mediaRecorder)
 
-        socket.emit('stopBroadcast','stopBroadcast')
-
+        //socket.emit('stopBroadcast','stopBroadcast')
+        socket.disconnect()
+        socket.close()
+        
         const endAllBroadcasts = endBroadcast()
         await endAllBroadcasts.endYoutubeLive()
 

@@ -44,7 +44,7 @@ export function SelectDevices(props: SelectDevicesProps) {
                 deviceId: devices.camId,
                 width: { min: 100, ideal: 720, max: 1920 },
                 height: { min: 100, ideal: 1280, max: 1080 },
-                frameRate: { ideal: 15 }
+                frameRate: { ideal: 30 }
             }
         };
 
@@ -74,12 +74,12 @@ export function SelectDevices(props: SelectDevicesProps) {
 
     return (
         <Container>
-            <header><h1>Bem-vindo ao estudio do Conexão</h1></header>
+            <header><h1>Welcome to Connection Studio</h1></header>
 
             <div className="devices">
 
                 <div className="leftSide">
-                    <span>Verifique seu dispositivo de áudio e vídeo</span>
+                    <span>Check your audio and video device</span>
 
                     <div className="video">
                         <video id="video" ref={videoRef} width="100%" height="100%" autoPlay muted />

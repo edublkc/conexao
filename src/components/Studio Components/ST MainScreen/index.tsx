@@ -101,7 +101,10 @@ export function MainScreen() {
         setScreenStream(stream)
 
     }
-    screenStream?.getVideoTracks()[0].addEventListener("ended", () => setIsScreenSharing(false))
+    screenStream?.getVideoTracks()[0].addEventListener("ended", () => {
+        setIsScreenSharing(false)
+        setSelectedScreenLayout('cameraOnly')
+    })
 
     function setScreenShareOnVideo() {
         if (screenStream) {

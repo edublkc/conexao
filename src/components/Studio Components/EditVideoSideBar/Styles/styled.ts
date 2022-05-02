@@ -16,9 +16,9 @@ padding-bottom:1rem;
     }   
 
         &::-webkit-scrollbar-thumb {
-        background: ${themes.colors.pink[500]};    /* color of the scroll thumb */
+        background: #343536;    /* color of the scroll thumb */
         border-radius: 20px;       /* roundness of the scroll thumb */
-        border: 1px solid ${themes.colors.pink[500]};  /* creates padding around scroll thumb */
+        border: 1px solid #343536;  /* creates padding around scroll thumb */
     }
 
 `

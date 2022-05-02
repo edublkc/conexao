@@ -16,28 +16,18 @@
 
 - Encerrar transmissao por botão [X]
 
-- Criar funcionalidades para a side bar[]
+- Criar funcionalidades para a side bar[x]
     - Layouts[x]
     - Cores[x]
-    #Adicionar Elementos (Quadrados, circulo,triangulo,seta,outros elementos)[] *DEIXAR PARA DEPOIS
-    #Adicionar elementos muito usados em streams
-        - Borda na camera []
-        - Imagem de fundo []
-        - Roda pé com informaçoes []
-        - Overlay []
-
     - Ajustar tamanho da camera[x]
-    - Criar temas de cores []
 
-- Adicionar marca d'agua do Connection []
+- Ajustar e deixar pronto o design da pagina de studio [X]
 
-- Ajustar e deixar pronto o design da pagina de studio []
-
-- Adicionar twitch na plataforma []
-
-- Melhorar qualidade da transmissão []
+- Melhorar qualidade da transmissão [x]
 
 - Ajustes de regra de negocio []
+
+- Fazer uma limpa na pasta do servidor []
 
 - Mudar front-end da pagina inicial []
 

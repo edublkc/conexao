@@ -80,4 +80,8 @@ export const GlobalStyle = createGlobalStyle`
        color: ${themes.colors.platforms.Youtube};
    }
 
+   .Twitch{
+    color: ${themes.colors.platforms.twitch};
+   }
+
 `
