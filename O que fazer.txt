@@ -26,6 +26,11 @@
 - Melhorar qualidade da transmissão [x]
 
 - Ajustes de regra de negocio []
+    - Não ir para pagina de settings sem ter live criada []
+    - Não ir para pagina de studio sem ter live criada []
+    - Caso a pessoa na otenha camera, exibir um canvas preto []
+
+- Continuar a live com a tela minimizada [ ]
 
 - Fazer uma limpa na pasta do servidor []
 

@@ -20,7 +20,8 @@ ReactModal.setAppElement('#root')
 interface CreateBroadcastInformations {
     title: string,
     description: string,
-    privacity: string
+    privacity: string,
+    liveCreated: string
 }
 
 
@@ -91,7 +92,7 @@ export function MACreateNewBroadcast() {
 
 
     async function handleCreateNewBroadcast(values: CreateBroadcastInformations) {
-        setBroadcastInformations(values)
+        setBroadcastInformations({...values,liveIsCreated: true})
         setIsLoading(true)
 
         const res = await handleCreateYoutubeBroadcast(values)

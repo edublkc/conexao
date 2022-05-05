@@ -25,43 +25,69 @@ export function SelectDevices(props: SelectDevicesProps) {
     const videoRef = useRef<HTMLVideoElement>({} as HTMLVideoElement)
 
     useEffect(() => {
+        let unmounted = false
+
+        async function getCamAndMicDevices() {
+
+            const devices = await navigator.mediaDevices.enumerateDevices()
+            const mics = devices.filter((device) => device.kind === 'audioinput')
+            const cams = devices.filter((cam) => cam.kind === 'videoinput')
+
+            if (!unmounted) {
+                setMicDevices(mics)
+                setCameraDevices(cams)
+            }
+
+        }
+
         getCamAndMicDevices()
 
+        return () => {
+
+            unmounted = true
+        }
     }, [])
 
+
     useEffect(() => {
-        getPermissionDevice()
+        let unmounted = false
+
+
+
+        async function getPermissionDevice() {
+            var constraints = {
+                audio: {
+                    deviceId: devices.micId,
+                    sampleRate: 22050,
+                    echoCancellation: true
+                },
+                video: {
+                    deviceId: devices.camId,
+                    width: { min: 100, ideal: 720, max: 1920 },
+                    height: { min: 100, ideal: 1280, max: 1080 },
+                    frameRate: { ideal: 30 }
+                }
+            };
+
+            const permissions = await navigator.mediaDevices.getUserMedia(constraints)
+            videoRef.current.srcObject = permissions
+            //setStreamMedia(permissions)
+        }
+
+        if (!unmounted) {
+            getPermissionDevice()
+        }
+
+
+        return () => {
+            unmounted = true
+        }
+
     }, [devices])
 
-    async function getPermissionDevice() {
-        var constraints = {
-            audio: {
-                deviceId: devices.micId,
-                sampleRate: 22050,
-                echoCancellation: true
-            },
-            video: {
-                deviceId: devices.camId,
-                width: { min: 100, ideal: 720, max: 1920 },
-                height: { min: 100, ideal: 1280, max: 1080 },
-                frameRate: { ideal: 30 }
-            }
-        };
 
-        const permissions = await navigator.mediaDevices.getUserMedia(constraints)
-        videoRef.current.srcObject = permissions
-        //setStreamMedia(permissions)
-    }
 
-    async function getCamAndMicDevices() {
-        const devices = await navigator.mediaDevices.enumerateDevices()
-        const mics = devices.filter((device) => device.kind === 'audioinput')
-        setMicDevices(mics)
 
-        const cams = devices.filter((cam) => cam.kind === 'videoinput')
-        setCameraDevices(cams)
-
-    }
 
     function handleGoToStudio() {
         if (nameToBeDisplayed.trim() === '') {

@@ -18,7 +18,8 @@ export interface Platform {
 interface BroadcastInformations {
     title: string,
     description: string,
-    privacity: string
+    privacity: string,
+    liveCreated: boolean
 }
 
 type PlatformsContext = {

@@ -46,54 +46,84 @@ export function MainScreen() {
 
 
     useEffect(() => {
-        let styles = localStorage.getItem('stylesDraw');
-        if (styles !== null) {
-            let styleObj: StylesProps = JSON.parse(styles)
-            stylesDraw(styleObj)
+        //let styles = localStorage.getItem('stylesDraw');
+       // if (styles !== null) {
+         //   let styleObj: StylesProps = JSON.parse(styles)
+           // stylesDraw(styleObj)
+     //   }
+    }, [])
+
+    useEffect(() => {
+        let unmounted = false
+
+        //canvasContext = canvasRef.current.getContext('2d')
+
+        async function getCameraDevice() {
+            var constraints = {
+                video: {
+                    deviceId: devices.camId,
+                    width: { min: 100, ideal: 1280, max: 1920 },
+                    height: { min: 100, ideal: 720, max: 1080 },
+                    frameRate: { ideal: 30 },
+                    facingMode: "environment"
+                }
+            };
+    
+            const cameraStream = await navigator.mediaDevices.getUserMedia(constraints)
+
+            if(!unmounted){
+                setCameraStream(cameraStream)
+            }
+        
         }
+
+        async function getAudioDevice() {
+            const audioStream = await navigator.mediaDevices.getUserMedia({
+                audio: {
+                    deviceId: devices.micId
+                }
+            });
+    
+            if(!unmounted){
+                setAudioStream(audioStream)
+               setAudioStreamContext(audioStream)
+            }
+            
+        }
+
+
+        if(!unmounted){
+            getCameraDevice()
+            getAudioDevice()
+        }
+
+        
+    
+        return () =>{
+            unmounted = true
+        }
+        
     }, [])
 
     useEffect(() => {
-        canvasContext = canvasRef.current.getContext('2d')
+        let unmounted = false
 
-        getCameraDevice()
-        getAudioDevice()
-    }, [])
-
-    useEffect(() => {
-        setImageOnVideo()
-        setImageAndAudioInCanvas()
-        setScreenShareOnVideo()
+        if(!unmounted){
+            setImageOnVideo()
+            setImageAndAudioInCanvas()
+            setScreenShareOnVideo()
+        }
+        
+        return () =>{
+            unmounted = true
+        }
     }, [cameraStream, audioStream, screenStream])
 
 
 
-    async function getCameraDevice() {
-        var constraints = {
-            video: {
-                deviceId: devices.camId,
-                width: { min: 100, ideal: 1280, max: 1920 },
-                height: { min: 100, ideal: 720, max: 1080 },
-                frameRate: { ideal: 30 },
-                facingMode: "environment"
-            }
-        };
+    
 
-        const cameraStream = await navigator.mediaDevices.getUserMedia(constraints)
-        setCameraStream(cameraStream)
-
-    }
-
-    async function getAudioDevice() {
-        const audioStream = await navigator.mediaDevices.getUserMedia({
-            audio: {
-                deviceId: devices.micId
-            }
-        });
-
-        setAudioStream(audioStream)
-        setAudioStreamContext(audioStream)
-    }
+    
 
     async function getScreenShare() {
         const stream = await navigator.mediaDevices.getDisplayMedia()
@@ -101,10 +131,12 @@ export function MainScreen() {
         setScreenStream(stream)
 
     }
+    /*
     screenStream?.getVideoTracks()[0].addEventListener("ended", () => {
         setIsScreenSharing(false)
         setSelectedScreenLayout('cameraOnly')
     })
+    */
 
     function setScreenShareOnVideo() {
         if (screenStream) {
@@ -190,12 +222,12 @@ export function MainScreen() {
         }
     }
 
-    window.addEventListener('keydown',(e)=>{
+   /* window.addEventListener('keydown',(e)=>{
         if(e.key === "Delete" || e.keyCode === 46){
             checkIfHasSomeShapeSelected()
         }
     })
-
+*/
 
    
    

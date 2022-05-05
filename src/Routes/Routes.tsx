@@ -12,6 +12,7 @@ import { Singup } from "../pages/Singup";
 import { Studio } from "../pages/Studio";
 
 import { AuthRoute } from "./AuthRoute";
+import { NeedBroadcastRoute } from "./NeedBroadcastRoute";
 
 export function RouterConfig() {
 
@@ -43,18 +44,20 @@ export function RouterConfig() {
 
             <Route path="/settings" element={
                 <AuthRoute>
-                    <Settings />
+                    <NeedBroadcastRoute>
+                        <Settings />
+                    </NeedBroadcastRoute>
                 </AuthRoute>
             } />
 
 
             <Route path="/studio" element={
                 <AuthRoute>
-                    <Studio />
+                    <NeedBroadcastRoute>
+                        <Studio />
+                    </NeedBroadcastRoute>
                 </AuthRoute>
             } />
-
-            <Route path="/studio/:slug" element={<InviteStudio />} />
 
             <Route path="*" element={<NotFound />} />
         </Routes>
