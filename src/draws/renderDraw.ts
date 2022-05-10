@@ -8,6 +8,9 @@ import { canvasHeight, canvasWidth } from "./positionsDraw"
 import { shapes } from "./ShapesDraw/shapesDraw"
 import { resizableSquare } from "./ShapesDraw/shapesMouseEventsDraw"
 import { stylesCanvasDraw } from "./StylesDraw/stylesDraw"
+import * as workerInterval from 'worker-interval';
+ 
+
 
 export let canvasReference: React.MutableRefObject<HTMLCanvasElement>
 
@@ -48,9 +51,10 @@ export function drawInCanvas(video: any, ctx: CanvasRenderingContext2D | null, s
 
     }
 
-    window.requestAnimationFrame(() => drawInCanvas(video, ctx, screen, canvasReferenceParms))
+    //window.requestAnimationFrame(() => drawInCanvas(video, ctx, screen, canvasReferenceParms))
 
-    //    setTimeout(drawInCanvas, 15, video, ctx, screen)
+       setTimeout(drawInCanvas, 10, video, ctx, screen)
+
 }
 
 

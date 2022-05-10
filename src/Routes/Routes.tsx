@@ -44,18 +44,18 @@ export function RouterConfig() {
 
             <Route path="/settings" element={
                 <AuthRoute>
-                    <NeedBroadcastRoute>
+                   
                         <Settings />
-                    </NeedBroadcastRoute>
+                    
                 </AuthRoute>
             } />
 
 
             <Route path="/studio" element={
                 <AuthRoute>
-                    <NeedBroadcastRoute>
+                   
                         <Studio />
-                    </NeedBroadcastRoute>
+                    
                 </AuthRoute>
             } />
 

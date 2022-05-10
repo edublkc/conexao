@@ -25,17 +25,19 @@
 
 - Melhorar qualidade da transmissão [x]
 
-- Ajustes de regra de negocio []
-    - Não ir para pagina de settings sem ter live criada []
-    - Não ir para pagina de studio sem ter live criada []
-    - Caso a pessoa na otenha camera, exibir um canvas preto []
+- Ajustes de regra de negocio [x]
+   
+    - Caso a pessoa nao tenha camera, exibir um canvas preto [x]
 
-- Continuar a live com a tela minimizada [ ]
+- Continuar a live com a tela minimizada [x]
 
-- Fazer uma limpa na pasta do servidor []
+- Fazer uma limpa na pasta do servidor [x]
 
 - Mudar front-end da pagina inicial []
 
 - Passar pente fino em tudo []
+
+ - Não ir para pagina de settings sem ter live criada []
+- Não ir para pagina de studio sem ter live criada []
 
 - Colocar em produção []

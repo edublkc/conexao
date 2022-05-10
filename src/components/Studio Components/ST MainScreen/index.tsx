@@ -46,17 +46,17 @@ export function MainScreen() {
 
 
     useEffect(() => {
-        //let styles = localStorage.getItem('stylesDraw');
-       // if (styles !== null) {
-         //   let styleObj: StylesProps = JSON.parse(styles)
-           // stylesDraw(styleObj)
-     //   }
+        let styles = localStorage.getItem('stylesDraw');
+        if (styles !== null) {
+            let styleObj: StylesProps = JSON.parse(styles)
+         stylesDraw(styleObj)
+        }
     }, [])
 
     useEffect(() => {
         let unmounted = false
 
-        //canvasContext = canvasRef.current.getContext('2d')
+        canvasContext = canvasRef.current.getContext('2d')
 
         async function getCameraDevice() {
             var constraints = {
@@ -120,23 +120,18 @@ export function MainScreen() {
     }, [cameraStream, audioStream, screenStream])
 
 
-
-    
-
-    
-
     async function getScreenShare() {
         const stream = await navigator.mediaDevices.getDisplayMedia()
         setIsScreenSharing(true)
         setScreenStream(stream)
 
     }
-    /*
+    
     screenStream?.getVideoTracks()[0].addEventListener("ended", () => {
         setIsScreenSharing(false)
         setSelectedScreenLayout('cameraOnly')
     })
-    */
+    
 
     function setScreenShareOnVideo() {
         if (screenStream) {
@@ -146,8 +141,11 @@ export function MainScreen() {
     }
 
     function setImageOnVideo() {
+        
         if (cameraStream) {
             camRef.current.srcObject = cameraStream
+        }else{
+            update(camRef.current, canvasContext, shareScreenRef.current)
         }
     }
 
@@ -159,6 +157,7 @@ export function MainScreen() {
 
 
     function setImageAndAudioInCanvas() {
+
         setCanvasStream(canvasRef.current.captureStream(35))
         setCanvasStreamContext(canvasRef.current.captureStream(35))
 
@@ -222,18 +221,17 @@ export function MainScreen() {
         }
     }
 
-   /* window.addEventListener('keydown',(e)=>{
+   window.addEventListener('keydown',(e)=>{
         if(e.key === "Delete" || e.keyCode === 46){
             checkIfHasSomeShapeSelected()
         }
     })
-*/
+
 
    
    
     function checkIfHasSomeShapeSelected(){
         if(selectedShape){
-            console.log('to caindo aqui')
             setIsSomeSelectedShape(selectedShape)
         }else if(selectedShape == null){
             setIsSomeSelectedShape(null)

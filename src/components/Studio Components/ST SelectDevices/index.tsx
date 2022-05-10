@@ -62,7 +62,7 @@ export function SelectDevices(props: SelectDevicesProps) {
                     echoCancellation: true
                 },
                 video: {
-                    deviceId: devices.camId,
+                    deviceId:devices.camId,
                     width: { min: 100, ideal: 720, max: 1920 },
                     height: { min: 100, ideal: 1280, max: 1080 },
                     frameRate: { ideal: 30 }
@@ -71,7 +71,6 @@ export function SelectDevices(props: SelectDevicesProps) {
 
             const permissions = await navigator.mediaDevices.getUserMedia(constraints)
             videoRef.current.srcObject = permissions
-            //setStreamMedia(permissions)
         }
 
         if (!unmounted) {
@@ -118,7 +117,6 @@ export function SelectDevices(props: SelectDevicesProps) {
                         <span><BsCameraVideo color={themes.colors.pink[500]} />Câmera</span>
                         <select onChange={(e) => setDevices({ ...devices, camId: e.target.value })}>
                             {cameraDevices.map((device) => {
-
                                 return (
                                     <option key={device.deviceId} value={device.deviceId}>
                                         {device.label}
