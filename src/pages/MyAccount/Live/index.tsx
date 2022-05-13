@@ -18,11 +18,11 @@ export function Live() {
                 <Content className="myAccountContent">
                    <header>
                         <div className="top">
-                            <h1>Ao vivo</h1>
+                            <h1>Live</h1>
                             <MACreateNewBroadcast/>
                         </div>
 
-                        <p>Crie uma nova transmissão, ou administre sua transmissão</p>
+                        <p>Create a new broadcast, or manage your broadcast</p>
                     </header>
 
 

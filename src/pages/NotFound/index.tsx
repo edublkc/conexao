@@ -11,7 +11,7 @@ export function NotFound() {
             <Container>
                 <Space></Space>
                 <div className="wrapper">
-                    <h1>Erro 404 - Página não encontrada.</h1>
+                    <h1>Erro 404 - Page not found</h1>
                 </div>
             </Container>
         </>

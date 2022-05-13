@@ -28,12 +28,11 @@ interface Errors {
 }
 
 const schema = yup.object({
-    email: yup.string().email('digite um email válido').required('este campo é obrigatório'),
-    password: yup.string().required('este campo é obrigatório').min(8, ''),
+    email: yup.string().email().required('This field is required'),
+    password: yup.string().required('This field is required').min(8, ''),
 })
 
 export function Singin() {
-    const [errorMessage, setErrorMessage] = useState('')
     const [isLoading, setIsLoading] = useState(false)
 
 
@@ -64,22 +63,22 @@ export function Singin() {
     }
 
     function MessageErro(error: Errors) {
-        setErrorMessage('')
+        let message = ''
 
         switch(error.code){
             case "auth/wrong-password":
-                setErrorMessage('E-mail e/ou senha inválido')
+                message = 'Invalid email and/or password'
             break;
             case 'auth/user-not-found':
-                setErrorMessage('Usuário não encontrado')
+                message = 'User not found'
             break;
         }
 
-        notify()
+        notify(message)
     }
 
-    function notify(){
-        toast.error(errorMessage, {
+    function notify(message: string){
+        toast.error(message, {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -108,8 +107,9 @@ export function Singin() {
 
             <div className="left-side">
                 <div className="wrapper">
-                    <h1>CONEXÃO</h1>
-                    <p>Receba via pix mensagens de vídeo, audio e texto facilmente e exiba o conteúdo recebido na sua transmissão facilmente.</p>
+                    <h1>CONNECTION</h1>
+                    <p>Start your first stream in 2 minutes.
+Livestream Directly from your browser. No complicated downloads</p>
                     <img src={womanDraw}></img>
                 </div>
             </div>
@@ -119,25 +119,25 @@ export function Singin() {
 
                     <div className="title">
                         <div className="hasAccount">
-                            <span>Ainda não tem conta? Então <Link to="/singup">faça seu cadastro</Link></span>
+                            <span>Don't have an account yet? Then <Link to="/singup">register</Link></span>
                         </div>
-                        <h1>Seja bem-vindo</h1>
-                        <h3>Digite seu e-mail e senha para entrar:</h3>
+                        <h1>Welcome</h1>
+                        <h3>Enter your email and password to login:</h3>
                     </div>
 
 
                     <form onSubmit={handleSubmit(handleSingIn)}>
                         <FormInput label="E-mail: " placeholder="E-mail" type="text" error={errors.email} disabled={isLoading} {...register('email')} />
-                        <FormInput label="Senha: " placeholder="Senha" type="password" error={errors.password} disabled={isLoading} {...register('password')} />
+                        <FormInput label="Password: " placeholder="Password" type="password" error={errors.password} disabled={isLoading} {...register('password')} />
 
 
 
                         <button type="submit" disabled={isLoading}>
                             {isLoading && <SyncLoader color={'#fff'} loading={isLoading} size={5} />}
-                            {!isLoading && 'Entrar'}
+                            {!isLoading && 'Log in'}
                         </button>
                     </form>
-                    <Link className="forgetPass" to="/">Esqueci minha senha</Link>
+                    <Link className="forgetPass" to="/">I forgot my password</Link>
                 </div>
             </div>
         </Container>

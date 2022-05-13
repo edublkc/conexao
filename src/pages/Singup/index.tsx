@@ -12,7 +12,7 @@ import { authenticateUser, createUser, logout } from "../../services/firebase/fi
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect, useState } from "react";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { css } from "@emotion/react";
 import SyncLoader from "react-spinners/SyncLoader";
@@ -28,25 +28,26 @@ interface Errors {
     code: string
 }
 
+const requiredFieldWrongText = 'This field is required'
+
 const schema = yup.object({
-    name: yup.string().required('este campo é obrigatório'),
-    email: yup.string().email('digite um email válido').required('este campo é obrigatório'),
-    password: yup.string().required('este campo é obrigatório').min(8, 'a senha deve ter no mínimo 8 dígitos'),
-    password_confirmation: yup.string().oneOf([null, yup.ref('password')], 'a confirmação de senha não está correta')
+    name: yup.string().required(requiredFieldWrongText),
+    email: yup.string().email().required(requiredFieldWrongText),
+    password: yup.string().required(requiredFieldWrongText).min(8),
+    password_confirmation: yup.string().oneOf([null, yup.ref('password')], 'passwords do not match')
 
 })
 
 export function Singup() {
-    const [errorMessage, setErrorMessage] = useState('')
-    const [isLoading,setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
 
-    useEffect(()=>{
+    useEffect(() => {
         logout()
-    },[])
+    }, [])
 
     const navigate = useNavigate()
 
-    const { register, handleSubmit, formState: { errors }} = useForm<handleSingUpProps>({
+    const { register, handleSubmit, formState: { errors } } = useForm<handleSingUpProps>({
         resolver: yupResolver(schema)
     })
 
@@ -62,26 +63,28 @@ export function Singup() {
             const error = JSON.parse(newUser)
             notify(error)
         } else {
-            await authenticateUser(values.email,values.password)
+            await authenticateUser(values.email, values.password)
             navigate('/myaccount/platforms')
         }
 
     }
 
     function notify(error: Errors) {
-        switch(error.code){
+        
+        let message = ''
+        switch (error.code) {
             case 'auth/email-already-in-use':
-                setErrorMessage('O e-mail fornecido já está em uso por outro usuário.')
-            break;
+                message = 'E-mail already registered'
+                break;
             case 'auth/error-invalid-email':
-                setErrorMessage('Digite um e-mail válido')
-            break;
+                message = 'Enter a valid email address'
+                break;
             case 'auth/error-weak-password':
-                setErrorMessage('Senha fraca')
-            break;
+                message = 'Weak password'
+                break;
         }
 
-        toast.error(errorMessage, {
+        toast.error(message, {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -89,7 +92,7 @@ export function Singup() {
             pauseOnHover: false,
             draggable: true,
             progress: undefined,
-            });
+        });
     }
 
     return (
@@ -110,8 +113,9 @@ export function Singup() {
 
             <div className="left-side">
                 <div className="wrapper">
-                    <h1>CONEXÃO</h1>
-                    <p>Receba via pix mensagens de vídeo, audio e texto facilmente e exiba o conteúdo recebido na sua transmissão facilmente.</p>
+                    <h1>CONNECTION</h1>
+                    <p>Start your first stream in 2 minutes.
+                        Livestream Directly from your browser. No complicated downloads</p>
                     <img src={womanDraw}></img>
                 </div>
             </div>
@@ -121,27 +125,27 @@ export function Singup() {
 
                     <div className="title">
                         <div className="hasAccount">
-                            <span>Você já tem uma conta? Então <Link to="/singin">faça o login</Link></span>
+                            <span>You already have an account? Then <Link to="/singin">login</Link></span>
                         </div>
-                        <h1>Crie sua conta grátis!</h1>
-                        <h3>Preencha todos os campos.</h3>
+                        <h1>Create your free account!</h1>
+                        <h3>Fill in all fields.</h3>
                     </div>
 
 
                     <form onSubmit={handleSubmit(handleSingUp)}>
 
-                        <FormInput label="Nome: " placeholder="Nome completo" type="text" error={errors.name} disabled={isLoading} {...register('name')} />
+                        <FormInput label="Name: " placeholder="Full name" type="text" error={errors.name} disabled={isLoading} {...register('name')} />
 
                         <FormInput label="E-mail: " placeholder="E-mail" type="text" error={errors.email} disabled={isLoading} {...register('email')} />
 
-                        <FormInput label="Senha: " placeholder="Senha" type="password" error={errors.password} disabled={isLoading} {...register('password')} />
+                        <FormInput label="Password: " placeholder="Password" type="password" error={errors.password} disabled={isLoading} {...register('password')} />
 
-                        <FormInput label="Confirmar senha: " placeholder="Confirme sua senha" type="password" disabled={isLoading} error={errors.password_confirmation} {...register('password_confirmation')} />
+                        <FormInput label="Confirm passord: " placeholder="Confirm your password" type="password" disabled={isLoading} error={errors.password_confirmation} {...register('password_confirmation')} />
 
 
                         <button type="submit" disabled={isLoading}>
                             {isLoading && <SyncLoader color={'#fff'} loading={isLoading} size={5} />}
-                            {!isLoading && 'Cadastrar'}
+                            {!isLoading && 'Register'}
                         </button>
                     </form>
 

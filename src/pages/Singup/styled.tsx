@@ -110,4 +110,17 @@ export const Container = styled.div`
 
     }
 
+    @media (max-width: 850px){
+        &{
+            
+            .left-side{
+                display: none;
+            }
+
+            .right-side{
+                padding: 0;
+            }
+        }
+    }
+
 `

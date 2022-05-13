@@ -18,8 +18,8 @@ export function AllPlatforms() {
 
                 <Content className="myAccountContent">
                     <header>
-                        <h1>Escolha uma plataforma</h1>
-                        <p>Seleciona uma ou mais plataformas para poder fazer sua transmissão simultaneamente para todas elas.</p>
+                        <h1>Choose a platform</h1>
+                        <p>Select one or more platforms to be able to broadcast simultaneously to all of them.</p>
                     </header>
                     
                     <div className="platforms">

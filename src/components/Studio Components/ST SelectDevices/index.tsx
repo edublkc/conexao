@@ -90,7 +90,7 @@ export function SelectDevices(props: SelectDevicesProps) {
 
     function handleGoToStudio() {
         if (nameToBeDisplayed.trim() === '') {
-            alert('Digite um nome')
+            alert('Enter a name')
             return
         }
 
@@ -114,7 +114,7 @@ export function SelectDevices(props: SelectDevicesProps) {
                 <div className="rightSide">
 
                     <div className="deviceConfig">
-                        <span><BsCameraVideo color={themes.colors.pink[500]} />Câmera</span>
+                        <span><BsCameraVideo color={themes.colors.pink[500]} />Camera</span>
                         <select onChange={(e) => setDevices({ ...devices, camId: e.target.value })}>
                             {cameraDevices.map((device) => {
                                 return (
@@ -127,7 +127,7 @@ export function SelectDevices(props: SelectDevicesProps) {
                     </div>
 
                     <div className="deviceConfig">
-                        <span><BsMic color={themes.colors.pink[500]} />Áudio</span>
+                        <span><BsMic color={themes.colors.pink[500]} />Audio</span>
                         <select onChange={(e) => setDevices({ ...devices, micId: e.target.value })}>
                             {micDevices.map((device) => {
 
@@ -141,14 +141,14 @@ export function SelectDevices(props: SelectDevicesProps) {
                     </div>
 
                     <div className="deviceConfig">
-                        <label>Nome a ser exibido: </label>
+                        <label>Name to be displayed: </label>
                         <input type="text" value={nameToBeDisplayed} onChange={(e) => {
                             setNameToBeDisplayed(e.target.value)
                             hostNameToBeDisplayed = e.target.value
                         }} />
                     </div>
 
-                    <button className="goStudioButton" type="button" onClick={handleGoToStudio}>Ir para estúdio</button>
+                    <button className="goStudioButton" type="button" onClick={handleGoToStudio}>Go to studio</button>
 
                 </div>
             </div>

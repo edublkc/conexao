@@ -72,7 +72,7 @@ export function MAAddTwitch() {
             ingestionUrl:  rtmpUrl + streamKey
         })
 
-        toast.success('Plataforma adicionada com sucesso.', {
+        toast.success('Platform added successfully.', {
             position: "top-right",
             autoClose: 2000,
             hideProgressBar: false,

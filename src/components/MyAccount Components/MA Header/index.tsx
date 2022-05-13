@@ -22,7 +22,7 @@ export function MAHeader() {
             <div className="wrapper">
                 <div className="left-side">
                     <Link to="/myaccount/platforms">
-                        <h1>CONEXÃO</h1>
+                        <h1>CONNECTION</h1>
                     </Link>
                 </div>
 

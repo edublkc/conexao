@@ -6,7 +6,7 @@ export function STHeader() {
     return (
         <Container>
             <h1>
-                CONEXÃO
+                CONNECTION
             </h1>
 
             <div className="options">

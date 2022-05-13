@@ -95,7 +95,7 @@ export function StartStreamButton() {
             {liveFinished === false && (
                 <Container onClick={handleStartOrEndLive} style={{ backgroundColor: `${!isLive ? themes.colors.pink[500] : themes.colors.error}` }}>
                     <RiBroadcastFill fontSize="1.5rem" />
-                    {isLive ? 'Encerrar Transmissão' : 'Iniciar transmissão'}
+                    {isLive ? 'End broadcast' : 'Start broadcast'}
                 </Container>
             )}
         </>

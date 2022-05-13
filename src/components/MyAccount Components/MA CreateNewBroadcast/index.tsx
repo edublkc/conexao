@@ -31,8 +31,8 @@ interface PlatformsSelected {
 }
 
 const schema = yup.object({
-    title: yup.string().required('É necessário um título para sua transmissão'),
-    description: yup.string().required('É necessário uma descrição para sua transmissão'),
+    title: yup.string().required('A title is required for your broadcast'),
+    description: yup.string().required('A description is required for your broadcast'),
     privacity: yup.string()
 })
 
@@ -121,13 +121,13 @@ export function MACreateNewBroadcast() {
 
             <ReactModal className="react-modal-content" overlayClassName="react-modal-overlay" isOpen={isCreateNewBroadcastModalOpen} onRequestClose={handleCloseCreateNewBroadcastModal}>
                 <ModalHeader>
-                    <h3>Transmitir para:</h3>
+                    <h3>Cast to:</h3>
                 </ModalHeader>
 
 
                 <ModalPlatforms>
                     {platforms.length == 0 &&
-                        <span className="addPlatform">{`Adicione alguma plataforma para começar a transmitir.`}</span>
+                        <span className="addPlatform">{`Add some platform to start streaming.`}</span>
                     }
 
                     {platforms.map((plat) => {
@@ -144,33 +144,33 @@ export function MACreateNewBroadcast() {
                     <>
                         {platformSelected.Youtube && (
                             <ModalForm onSubmit={handleSubmit(handleCreateNewBroadcast)}>
-                                <FormInput error={errors.title} dark={true} label="Título" placeholder="Digite um título para sua transmissão" disabled={isLoading} {...register('title')} />
+                                <FormInput error={errors.title} dark={true} label="Title" placeholder="Enter a title for your broadcast" disabled={isLoading} {...register('title')} />
 
                                 <div className="description">
-                                    <label>Descrição</label>
-                                    <textarea placeholder="Digite uma descrição para sua transmissão" disabled={isLoading}  {...register('description')}></textarea>
+                                    <label>Description</label>
+                                    <textarea placeholder="Enter a description for your broadcast" disabled={isLoading}  {...register('description')}></textarea>
 
                                 </div>
 
                                 <div className="privacity">
-                                    <label>Privacidade</label>
+                                    <label>Privacity</label>
                                     <select disabled={isLoading} {...register('privacity')}>
-                                        <option value='public'>Público</option>
-                                        <option value="unlisted">Não listado</option>
-                                        <option value="private">Privado</option>
+                                        <option value='public'>Public</option>
+                                        <option value="unlisted">Unlisted</option>
+                                        <option value="private">Private</option>
                                     </select>
                                 </div>
 
                                 <CreateBroadcastButton type="submit" disabled={isLoading}>
                                     {isLoading && <SyncLoader color={'#fff'} loading={isLoading} size={5} />}
-                                    {!isLoading && 'Criar transmissão'}
+                                    {!isLoading && 'Create broadcast'}
                                 </CreateBroadcastButton>
                             </ModalForm>
                         )}
 
                         {platformSelected.Twitch && !platformSelected.Youtube && (
                             <CreateBroadcastButton onClick={handleCreateTwitchBroadcast}>
-                                Criar transmissão
+                                Create broadcast
                             </CreateBroadcastButton>
                         )}
 
@@ -184,7 +184,7 @@ export function MACreateNewBroadcast() {
 
 
             <Container onClick={handleOpenCreateNewBroadcastModal}>
-                Criar nova transmissão
+            Create a new broadcast
             </Container>
         </>
 

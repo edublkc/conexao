@@ -6,9 +6,9 @@ export function MAAddPlatform() {
 
     return (
         <Container>
-        <Link to="/myaccount/platforms/allplatforms">
-            Adicionar plataforma
-        </Link>
-    </Container>
+            <Link to="/myaccount/platforms/allplatforms">
+                Add platform
+            </Link>
+        </Container>
     )
 }

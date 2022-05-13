@@ -32,7 +32,7 @@ export function MAAddYoutube() {
         (window.gapi as any).client?.setApiKey(process.env.REACT_APP_GOOGLE_API_KEY)
         return (window.gapi as any).client?.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
             .then((res: any) => {
-                toast.success('Plataforma adicionada com sucesso.', {
+                toast.success('Platform added successfully.', {
                     position: "top-right",
                     autoClose: 2000,
                     hideProgressBar: false,

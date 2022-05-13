@@ -33,13 +33,17 @@
 
 - Fazer uma limpa na pasta do servidor [x]
 
-- Mudar front-end da pagina inicial []
+- Mudar front-end da pagina inicial [x]
 
-- Colocar tudo em ingles []
+- Colocar tudo em ingles [x]
+
+- Não ir para pagina de settings sem ter live criada []
+- Não ir para pagina de studio sem ter live criada []
+- não abrir duas paginas iguais []
+- não adicionar mais de uma conta no youtube []
+
+- tentar colocar a twitch novamente []
 
 - Passar pente fino em tudo []
-
- - Não ir para pagina de settings sem ter live criada []
-- Não ir para pagina de studio sem ter live criada []
 
 - Colocar em produção []

@@ -20,17 +20,17 @@ export function Platforms() {
                 <Content className="myAccountContent">
                     <header>
                         <div className="top">
-                            <h1>Plataformas</h1>
+                            <h1>Platforms</h1>
                             <MAAddPlatform />
                         </div>
 
-                        <p>Suas plataformas cadastradas</p>
+                        <p>Your registered platforms</p>
                     </header>
 
                     {platforms.length > 0 && (
                         <section>
                             
-                            <h3>Nome</h3>
+                            <h3>Name</h3>
                             <div className="line"></div>
                             <MAAddedPlatforms />
 

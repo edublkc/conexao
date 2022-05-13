@@ -12,8 +12,8 @@ export function MASideBar() {
         <Container>
             <nav>
                 <ul>
-                    <li><NavLink to="/myaccount/platforms" ><MdAccountTree fontSize={18} /> Minhas plataformas</NavLink></li>
-                    <li><NavLink to="/myaccount/live"><RiLiveFill fontSize={18} /> Ao vivo</NavLink></li>
+                    <li><NavLink to="/myaccount/platforms" ><MdAccountTree fontSize={18} /> My platforms</NavLink></li>
+                    <li><NavLink to="/myaccount/live"><RiLiveFill fontSize={18} /> Live</NavLink></li>
                 </ul>
             </nav>
         </Container>
