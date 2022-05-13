@@ -35,6 +35,8 @@
 
 - Mudar front-end da pagina inicial []
 
+- Colocar tudo em ingles []
+
 - Passar pente fino em tudo []
 
  - Não ir para pagina de settings sem ter live criada []

@@ -5,7 +5,7 @@ export function MyAccountButton() {
     return (
         <Container>
             <Link to="/myaccount/platforms">
-                Minha conta
+                My account
             </Link>
         </Container>
     )

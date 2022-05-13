@@ -5,7 +5,7 @@ export function SingInButton() {
     return (
         <Container>
             <Link to="/singin">
-                Entrar
+                Sign in
             </Link>
         </Container>
     )

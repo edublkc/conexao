@@ -5,7 +5,7 @@ export function SignupButton() {
     return (
         <Container>
             <Link to="/singup">
-                Cadastre-se
+                Sign up
             </Link>
         </Container>
     )

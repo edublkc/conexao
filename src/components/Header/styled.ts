@@ -5,6 +5,18 @@ export const Container = styled.header`
     display:flex;
     align-items:center;
     justify-content:center ;
+   
+
+    &.bgScroll{
+    background-color: rgb(52 5 91);
+    transition: all 0.4s;
+    z-index: 10;
+    position: sticky;
+    top: 0;
+    left: 0;
+    }
+   
+    
 
     .wrapper{
         width:100%;
@@ -45,5 +57,16 @@ export const Container = styled.header`
         }
     }
 
+    @media (max-width: 680px){
+        .wrapper{
+            justify-content: center;
+
+            .right-side{
+                display: none;
+            }
+        }
+    }
+
 
 `
+

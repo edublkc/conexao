@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router-dom"
 
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { firebaseAuthContext } from "../../context/firebaseAuthContext"
 
 import { Container } from "./styled"
@@ -16,31 +16,29 @@ import { SignoutButton } from "../SingoutButton"
 export function Header() {
     const { authenticated, loadingInformations } = useContext(firebaseAuthContext)
 
+    const [isScrollDown,setIsScrollDown] = useState(false)
+
+    window.addEventListener('scroll',()=>{
+        if(window.scrollY >= 130){
+            setIsScrollDown(true)
+        }else{
+            setIsScrollDown(false)
+        }
+
+        
+    })
+    
+
     return (
-        <Container>
+        <Container className={isScrollDown ? 'bgScroll' : ''}>
             <div className="wrapper">
                 <div className="left-side">
                     <Link to="/">
-                        <h1>CONEXÃO</h1>
+                        <h1>CONNECTION</h1>
                     </Link>
                 </div>
 
-                <div className="center">
-                    <nav>
-                        <ul>
-                            <li>
-                                <NavLink to="/">
-                                    Home
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink to="/more">
-                                    Saiba mais
-                                </NavLink>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
+               
 
 
                 <div className="right-side">
@@ -66,3 +64,22 @@ export function Header() {
         </Container>
     )
 }
+
+/*
+ <div className="center">
+                    <nav>
+                        <ul>
+                            <li>
+                                <NavLink to="/">
+                                    Home
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/more">
+                                    Saiba mais
+                                </NavLink>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+*/

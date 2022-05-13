@@ -6,7 +6,7 @@ export function SignoutButton() {
     return (
         <Container>
             <Link to="/" onClick={logout}>
-                Sair
+            Logout
             </Link>
         </Container>
     )

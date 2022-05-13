@@ -5,12 +5,12 @@ import styled from "styled-components";
 export const Container = styled.div`
 
     a{
-    background-color: ${themes.colors.blueGray[100]};
-    color: ${themes.colors.bg};
+    //background-color: ${themes.colors.blueGray[100]};
+    color: ${themes.colors.pink[500]};
     border-radius: 0.3125rem;
     padding:0.5rem 0.625rem;
     font-size: 0.812rem;
-    transition:0.2s;
+    transition:0.1s;
     font-weight: 700;
 
     display: flex;
@@ -18,7 +18,7 @@ export const Container = styled.div`
     gap: 0.625rem;
 
     &:hover{
-        filter:brightness(0.9);
+        filter:brightness(0.95);
     }
     }
    
