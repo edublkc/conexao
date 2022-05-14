@@ -24,6 +24,7 @@ export function AllPlatforms() {
                     
                     <div className="platforms">
                         <MAAddYoutube/>
+                      
                     </div>
                 </Content>
             </Wrapper>

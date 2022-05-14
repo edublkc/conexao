@@ -17,7 +17,7 @@ export function MAAddYoutube() {
         return (window.gapi as any).auth2?.getAuthInstance()?.signIn({ scope: "https://www.googleapis.com/auth/youtube.force-ssl" }).then((res: any) => {
             console.log('AUTENTICAÇÃO----', res)
 
-            setPlatform([...platforms,{
+            setPlatform([...platforms.filter(value => value.platformName !== 'Youtube'),{
                 name: res.Qu.sf,
                 avatar: res.Qu.MN,
                 accessToken: res.xc.access_token,

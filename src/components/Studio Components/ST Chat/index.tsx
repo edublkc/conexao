@@ -1,8 +1,9 @@
-import { Container } from "./styled";
+import { Container,LoadMessages} from "./styled";
 import { useContext, useEffect, useState } from "react";
 import {  useCanvasContext } from "../../../context/canvasContext";
 import { BroadcastInformationsContext } from "../../../context/broadcastInformationsContext";
 import connectionPic from "../../../assets/connectionPic.svg"
+import {HiRefresh} from 'react-icons/hi'
 
 let nextPageToken: string
 
@@ -69,7 +70,9 @@ export function Chat() {
     const valor = false
 
     return (
-        <Container>
+        <>
+            <LoadMessages onClick={execute}><HiRefresh/>Load new messages</LoadMessages>
+            <Container>
             {chatMessages && (
                 chatMessages.map((chat) => {
                     return (
@@ -89,11 +92,10 @@ export function Chat() {
                     )
                 })
             )}
-<button onClick={execute}>Iniciar chat</button>
-
-            
-
         </Container>
+        
+        </>
+    
     )
 }
 

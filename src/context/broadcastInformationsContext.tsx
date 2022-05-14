@@ -34,6 +34,9 @@ type PlatformsContext = {
 
     twitchBroadcast: TwitchBroadcast
     setTwitchBroadcast: React.Dispatch<TwitchBroadcast>
+
+    broadcastCreated: boolean
+    setBroadcastCreated: React.Dispatch<boolean>
 }
 
 interface TwitchBroadcast {
@@ -48,6 +51,7 @@ export function BroadcastInformationsContextProvider({ children }: PlatformsCont
     const [platforms, setPlatform] = useState([] as Platform[])
 
     const [broadcastInformations, setBroadcastInformations] = useState({} as BroadcastInformations)
+    const [broadcastCreated,setBroadcastCreated] = useState(false)
 
     const [youtubeBroadcast, setYoutubeBroadcast] = useState({} as streamInformations)
     const [twitchBroadcast,setTwitchBroadcast] = useState({} as TwitchBroadcast)
@@ -63,7 +67,9 @@ export function BroadcastInformationsContextProvider({ children }: PlatformsCont
                 youtubeBroadcast,
                 setYoutubeBroadcast,
                 twitchBroadcast,
-                setTwitchBroadcast
+                setTwitchBroadcast,
+                broadcastCreated,
+                setBroadcastCreated
             }}>
             {children}
         </BroadcastInformationsContext.Provider>

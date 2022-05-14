@@ -56,7 +56,7 @@ export function MAAddTwitch() {
 
         localStorage.setItem('twitchStreamOptions', JSON.stringify(twitchStreamOptions));
 
-        setPlatform([...platforms.filter(value => value.name !== 'Twitch'), {
+        setPlatform([...platforms.filter(value => value.platformName !== 'Twitch'), {
             name: name || 'Twitch',
             avatar: 'https://www.freepnglogos.com/uploads/purple-twitch-logo-png-18.png',
             accessToken: 'res.xc.access_token',

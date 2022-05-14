@@ -11,10 +11,10 @@ interface Props {
 
 export function NeedBroadcastRoute({children}: Props) {
     const navigate = useNavigate()
-    const {broadcastInformations} = useContext(BroadcastInformationsContext)
+    const {broadcastCreated} = useContext(BroadcastInformationsContext)
 
     useEffect(()=>{
-        if(broadcastInformations.liveCreated){
+        if(broadcastCreated){
             
         }else{
             navigate('/')

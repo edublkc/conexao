@@ -70,7 +70,11 @@ export function SelectDevices(props: SelectDevicesProps) {
             };
 
             const permissions = await navigator.mediaDevices.getUserMedia(constraints)
-            videoRef.current.srcObject = permissions
+
+            if(!unmounted){
+                videoRef.current.srcObject = permissions
+
+            }
         }
 
         if (!unmounted) {

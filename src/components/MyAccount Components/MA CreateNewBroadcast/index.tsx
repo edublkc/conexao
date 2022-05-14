@@ -38,7 +38,7 @@ const schema = yup.object({
 
 export function MACreateNewBroadcast() {
     const navigate = useNavigate()
-    const { setBroadcastInformations, setYoutubeBroadcast, platforms, youtubeBroadcast, setPlatform } = useContext(BroadcastInformationsContext)
+    const { setBroadcastInformations, setYoutubeBroadcast, platforms, youtubeBroadcast, setPlatform,setBroadcastCreated} = useContext(BroadcastInformationsContext)
 
     const { register, handleSubmit, formState: { errors } } = useForm<CreateBroadcastInformations>({
         resolver: yupResolver(schema)
@@ -92,7 +92,6 @@ export function MACreateNewBroadcast() {
 
 
     async function handleCreateNewBroadcast(values: CreateBroadcastInformations) {
-        setBroadcastInformations({...values,liveIsCreated: true})
         setIsLoading(true)
 
         const res = await handleCreateYoutubeBroadcast(values)
@@ -108,6 +107,7 @@ export function MACreateNewBroadcast() {
         console.log(res)
 
         setIsLoading(false)
+        setBroadcastCreated(true)
         navigate('/settings')
     }
 

@@ -37,12 +37,14 @@
 
 - Colocar tudo em ingles [x]
 
-- Não ir para pagina de settings sem ter live criada []
-- Não ir para pagina de studio sem ter live criada []
-- não abrir duas paginas iguais []
-- não adicionar mais de uma conta no youtube []
+- Não exibir botao de iniciar transmissao sem ter live criada []
 
-- tentar colocar a twitch novamente []
+- não abrir duas paginas iguais [X]
+
+
+- não adicionar mais de uma conta no youtube [x]
+
+- tentar colocar a twitch novamente [x]
 
 - Passar pente fino em tudo []
 
