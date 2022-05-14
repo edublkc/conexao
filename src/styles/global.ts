@@ -97,6 +97,20 @@ export const GlobalStyle = createGlobalStyle`
         font-size: 87.5%; //14px
     }
 }
+
+&::-webkit-scrollbar {
+         width: 8px;               /* width of the entire scrollbar */
+    }
+
+        &::-webkit-scrollbar-track {
+        background: #18191B;        /* color of the tracking area */
+    }   
+
+        &::-webkit-scrollbar-thumb {
+        background: #343536;    /* color of the scroll thumb */
+        border-radius: 20px;       /* roundness of the scroll thumb */
+        border: 1px solid #343536;  /* creates padding around scroll thumb */
+    }
    
 
 `

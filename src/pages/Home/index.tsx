@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react"
 import { Container, Space, Page, FullViewContainer, FaqContainer, HorizontalLine, NormalSection,Footer} from "./styled"
 import { FaArrowRight } from "react-icons/fa"
+import {IoMdGitCompare,IoMdGitNetwork} from "react-icons/io"
+import {MdOutlineAttachMoney} from "react-icons/md"
+import {FcIdea} from "react-icons/fc"
 import { Header } from "../../components/Header"
 import { Link } from "react-router-dom"
 import presentationVideo from "../../assets/presentation.mp4"
@@ -24,7 +27,7 @@ export function Home() {
   
 
     return (
-        <>
+        
             <Page>
                 <Header />
 
@@ -58,7 +61,7 @@ export function Home() {
                 <FaqContainer>
                     <div className="wrapp">
                         <div data-aos='fade-right' className="leftSide">
-                            <img src="https://preview.cruip.com/switch/dist/images/feature-01-dark.svg" />
+                            <IoMdGitCompare fontSize={40} color="#8595AE"/>
                         </div>
                         <div data-aos='fade-right' className="rightSide">
                             <div className="title">
@@ -68,7 +71,7 @@ export function Home() {
                                 <p>
                                     Connection is completely in the browser.
                                     You do not need to download anything.
-                                    Additionally you can stream to multiple services at the same time without the need to download complicated extensions.
+                                    Also, you will soon be able to stream to multiple services at the same time without the need to download complicated extensions.
                                 </p>
                             </div>
                         </div>
@@ -76,7 +79,24 @@ export function Home() {
 
                     <div className="wrapp">
                         <div data-aos='fade-right' className="leftSide">
-                            <img src="https://preview.cruip.com/switch/dist/images/feature-01-dark.svg" />
+                            <FcIdea fontSize={40} color="#8595AE"/>
+                        </div>
+                        <div data-aos='fade-right' className="rightSide">
+                            <div className="title">
+                                <h1>What is the main idea of ​ Connection?</h1>
+                            </div>
+                            <div className="description">
+                                <p>
+                                The idea is to facilitate the creation of a live stream, for now we only have youtube as a platform, 
+                                but the main idea is to be multistreaming
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="wrapp">
+                        <div data-aos='fade-right' className="leftSide">
+                            <IoMdGitNetwork fontSize={40} color="#8595AE"/>
                         </div>
                         <div data-aos='fade-right' className="rightSide">
                             <div className="title">
@@ -93,7 +113,7 @@ export function Home() {
 
                     <div className="wrapp">
                         <div data-aos='fade-right' className="leftSide">
-                            <img src="https://preview.cruip.com/switch/dist/images/feature-01-dark.svg" />
+                            <MdOutlineAttachMoney fontSize={40} color="#8595AE"/>
                         </div>
                         <div data-aos='fade-right' className="rightSide">
                             <div className="title">
@@ -134,7 +154,7 @@ export function Home() {
 
 
 
-        </>
+        
 
 
 

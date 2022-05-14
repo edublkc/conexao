@@ -8,7 +8,8 @@ export const Container = styled.header`
    
 
     &.bgScroll{
-    background-color: rgb(52 5 91);
+    //background-color: rgb(52 5 91);
+    background-color: rgba(0,0,0,0.8);
     transition: all 0.4s;
     z-index: 10;
     position: sticky;

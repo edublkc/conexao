@@ -5,11 +5,14 @@ import bgImg from "../../assets/banner-bg.png"
 
 export const Page = styled.main`
   //background-color: #182538;
-    background: rgba(52, 5, 91, 0.7) url(${bgImg});
-    background-blend-mode: multiply;
-    background-position: center;
-    background-size: cover;
-    background-attachment: fixed;
+    //background: rgba(52, 5, 91, 0.7) url(${bgImg});
+    //background-blend-mode: multiply;
+   // background-position: center;
+   // background-size: cover;
+   // background-attachment: fixed;
+
+  
+    
 
 `
 
