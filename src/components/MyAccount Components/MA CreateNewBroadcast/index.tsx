@@ -104,7 +104,7 @@ export function MACreateNewBroadcast() {
             return value
         })])
 
-        console.log(res)
+        
 
         setIsLoading(false)
         setBroadcastCreated(true)

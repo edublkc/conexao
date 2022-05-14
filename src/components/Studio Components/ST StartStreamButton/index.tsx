@@ -86,7 +86,9 @@ export function StartStreamButton() {
 
     
 
-    window.onbeforeunload = () => endLive()
+    window.onbeforeunload = () => {
+        window.onclose = () => endLive()
+    }
     window.onclose = () => endLive()
 
 

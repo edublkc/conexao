@@ -11,7 +11,8 @@ export interface streamInformations {
     youtubeIngestionUrl:string
     youtubeStreamName:string
     rtmpUrl: string
-    liveChatId: string
+    liveChatId: string,
+    liveLink: string
 }
 
 export let broadcastId: string
@@ -91,6 +92,7 @@ async function handleCreateStream(broadcastInformations:CreateBroadcastInformati
     streamInformations.rtmpUrl = rtmpUrl
     streamInformations.youtubeStreamName = youtubeStreamName
     streamInformations.youtubeIngestionUrl = rtmpUrl + '/' + youtubeStreamName
+    streamInformations.liveLink = `https://www.youtube.com/watch?v=${streamInformations.broadcastId}`
 
     return await handlebindBroadcast(broadcastInformations)
 

@@ -14,4 +14,10 @@ export const Container = styled.header`
     h1{
         cursor: pointer;
     }
+
+    .options{
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
 `

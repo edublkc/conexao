@@ -12,7 +12,7 @@ export interface Platform {
     avatar: string,
     platformName: string,
     selected: boolean,
-    ingestionUrl: string
+    ingestionUrl: string,
 }
 
 interface BroadcastInformations {
