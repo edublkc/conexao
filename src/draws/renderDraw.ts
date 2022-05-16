@@ -8,9 +8,7 @@ import { canvasHeight, canvasWidth } from "./positionsDraw"
 import { shapes } from "./ShapesDraw/shapesDraw"
 import { resizableSquare } from "./ShapesDraw/shapesMouseEventsDraw"
 import { stylesCanvasDraw } from "./StylesDraw/stylesDraw"
-import * as workerInterval from 'worker-interval';
  
-
 
 export let canvasReference: React.MutableRefObject<HTMLCanvasElement>
 
