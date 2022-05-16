@@ -4,7 +4,7 @@ import { RouterConfig } from './routes/Routes';
 import { FirebaseAuthProvider } from './context/firebaseAuthContext';
 import { BroadcastInformationsContextProvider } from './context/broadcastInformationsContext'
 import { CanvasContextProvider } from "./context/canvasContext";
-
+   
 function App() {
   return (
 
