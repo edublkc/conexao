@@ -9,7 +9,7 @@ import { endBroadcast } from "../../../services/endLive"
 import { themes } from "../../../styles/themes"
 
 const socketOptions = { secure: true, reconnection: true, reconnectionDelay: 1000, timeout: 15000, pingTimeout: 15000, pingInterval: 45000, query: { framespersecond: 15, audioBitrate: 22050 } };
-const socket = io('http://132.226.240.66:3036/', socketOptions)
+const socket = io('132.226.240.66:3036', socketOptions)
 
 interface StartStreamButtonProps {
     canvasStream?: MediaStream | undefined
