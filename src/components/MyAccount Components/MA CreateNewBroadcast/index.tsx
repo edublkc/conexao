@@ -14,6 +14,7 @@ import * as yup from "yup";
 import { handleCreateYoutubeBroadcast } from "../../../services/createYoutubeLive";
 
 import SyncLoader from "react-spinners/SyncLoader";
+import { toast, ToastContainer } from "react-toastify";
 
 ReactModal.setAppElement('#root')
 
@@ -94,21 +95,37 @@ export function MACreateNewBroadcast() {
     async function handleCreateNewBroadcast(values: CreateBroadcastInformations) {
         setIsLoading(true)
 
-        const res = await handleCreateYoutubeBroadcast(values)
-        setYoutubeBroadcast(res)
+        try {
+            const res = await handleCreateYoutubeBroadcast(values)
+            setYoutubeBroadcast(res)
+    
+            setPlatform([...platforms.map((value) => {
+                if (value.platformName === 'Youtube') {
+                    value.ingestionUrl = res.youtubeIngestionUrl
+                }
+                return value
+            })])
+    
+            
+    
+            setIsLoading(false)
+            setBroadcastCreated(true)
+            navigate('/settings')
+            
+        } catch (error: any) {
+            toast.error(error.result.error.message, {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+            })
 
-        setPlatform([...platforms.map((value) => {
-            if (value.platformName === 'Youtube') {
-                value.ingestionUrl = res.youtubeIngestionUrl
-            }
-            return value
-        })])
-
-        
-
-        setIsLoading(false)
-        setBroadcastCreated(true)
-        navigate('/settings')
+            handleCloseCreateNewBroadcastModal()
+        }
+       
     }
 
     function handleCreateTwitchBroadcast(){
@@ -118,6 +135,19 @@ export function MACreateNewBroadcast() {
 
     return (
         <>
+
+        <ToastContainer
+                position="top-right"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover={false}
+                theme="colored"
+            />
 
             <ReactModal className="react-modal-content" overlayClassName="react-modal-overlay" isOpen={isCreateNewBroadcastModalOpen} onRequestClose={handleCloseCreateNewBroadcastModal}>
                 <ModalHeader>
@@ -186,6 +216,9 @@ export function MACreateNewBroadcast() {
             <Container onClick={handleOpenCreateNewBroadcastModal}>
             Create a new broadcast
             </Container>
+
+
+            
         </>
 
     )
