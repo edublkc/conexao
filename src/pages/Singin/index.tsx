@@ -36,9 +36,9 @@ export function Singin() {
     const [isLoading, setIsLoading] = useState(false)
 
 
-    useEffect(()=>{
+    useEffect(() => {
         logout()
-    },[])
+    }, [])
 
     const navigate = useNavigate()
 
@@ -48,7 +48,7 @@ export function Singin() {
 
     const handleSingIn = async (values: handleSingUpProps) => {
         setIsLoading(true)
-        const user = await authenticateUser(values.email,values.password)
+        const user = await authenticateUser(values.email, values.password)
         setIsLoading(false)
 
         if (typeof user === "string") {
@@ -58,26 +58,26 @@ export function Singin() {
             navigate('/myaccount/platforms')
         }
 
-        
+
 
     }
 
     function MessageErro(error: Errors) {
         let message = ''
 
-        switch(error.code){
+        switch (error.code) {
             case "auth/wrong-password":
                 message = 'Invalid email and/or password'
-            break;
+                break;
             case 'auth/user-not-found':
                 message = 'User not found'
-            break;
+                break;
         }
 
         notify(message)
     }
 
-    function notify(message: string){
+    function notify(message: string) {
         toast.error(message, {
             position: "top-right",
             autoClose: 5000,
@@ -107,10 +107,14 @@ export function Singin() {
 
             <div className="left-side">
                 <div className="wrapper">
-                    <h1>CONNECTION</h1>
-                    <p>Start your first stream in 2 minutes.
-Livestream Directly from your browser. No complicated downloads</p>
-                    <img src={womanDraw}></img>
+                    <Link to='/'>
+                        <h1>CONNECTION</h1>
+                        <p>Start your first stream in 2 minutes.
+                            Livestream Directly from your browser. No complicated downloads</p>
+                            <img src={womanDraw}></img>
+                    </Link>
+
+                   
                 </div>
             </div>
 

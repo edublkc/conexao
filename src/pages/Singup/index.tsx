@@ -70,7 +70,7 @@ export function Singup() {
     }
 
     function notify(error: Errors) {
-        
+
         let message = ''
         switch (error.code) {
             case 'auth/email-already-in-use':
@@ -113,10 +113,13 @@ export function Singup() {
 
             <div className="left-side">
                 <div className="wrapper">
-                    <h1>CONNECTION</h1>
-                    <p>Start your first stream in 2 minutes.
-                        Livestream Directly from your browser. No complicated downloads</p>
-                    <img src={womanDraw}></img>
+                    <Link to='/'>
+                        <h1>CONNECTION</h1>
+                        <p>Start your first stream in 2 minutes.
+                            Livestream Directly from your browser. No complicated downloads</p>
+                        <img src={womanDraw}></img>
+                    </Link>
+
                 </div>
             </div>
 

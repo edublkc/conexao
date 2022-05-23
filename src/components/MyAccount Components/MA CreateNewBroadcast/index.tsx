@@ -39,7 +39,7 @@ const schema = yup.object({
 
 export function MACreateNewBroadcast() {
     const navigate = useNavigate()
-    const { setBroadcastInformations, setYoutubeBroadcast, platforms, youtubeBroadcast, setPlatform,setBroadcastCreated} = useContext(BroadcastInformationsContext)
+    const { setBroadcastInformations, setYoutubeBroadcast, platforms, youtubeBroadcast, setPlatform, setBroadcastCreated } = useContext(BroadcastInformationsContext)
 
     const { register, handleSubmit, formState: { errors } } = useForm<CreateBroadcastInformations>({
         resolver: yupResolver(schema)
@@ -48,6 +48,7 @@ export function MACreateNewBroadcast() {
     const [isCreateNewBroadcastModalOpen, setIsCreateNewBroadcastModalOpen] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const [platformSelected, setPlatformSelected] = useState<PlatformsSelected>({ 'Youtube': false, 'Twitch': false })
+    const [cantCreateStream, setCantCreateStream] = useState(false)
 
     function handleOpenCreateNewBroadcastModal() {
         setIsCreateNewBroadcastModalOpen(true)
@@ -98,37 +99,38 @@ export function MACreateNewBroadcast() {
         try {
             const res = await handleCreateYoutubeBroadcast(values)
             setYoutubeBroadcast(res)
-    
+
             setPlatform([...platforms.map((value) => {
                 if (value.platformName === 'Youtube') {
                     value.ingestionUrl = res.youtubeIngestionUrl
                 }
                 return value
             })])
-    
-            
-    
+
+
+
             setIsLoading(false)
             setBroadcastCreated(true)
             navigate('/settings')
-            
+
         } catch (error: any) {
             toast.error(error.result.error.message, {
                 position: "top-right",
-                autoClose: 2000,
+                autoClose: 5000,
                 hideProgressBar: false,
                 closeOnClick: true,
-                pauseOnHover: false,
+                pauseOnHover: true,
                 draggable: true,
                 progress: undefined,
             })
 
+            setCantCreateStream(true)
             handleCloseCreateNewBroadcastModal()
         }
-       
+
     }
 
-    function handleCreateTwitchBroadcast(){
+    function handleCreateTwitchBroadcast() {
         setIsLoading(true)
         navigate('/settings')
     }
@@ -136,7 +138,7 @@ export function MACreateNewBroadcast() {
     return (
         <>
 
-        <ToastContainer
+            <ToastContainer
                 position="top-right"
                 autoClose={2000}
                 hideProgressBar={false}
@@ -191,10 +193,13 @@ export function MACreateNewBroadcast() {
                                     </select>
                                 </div>
 
-                                <CreateBroadcastButton type="submit" disabled={isLoading}>
-                                    {isLoading && <SyncLoader color={'#fff'} loading={isLoading} size={5} />}
-                                    {!isLoading && 'Create broadcast'}
-                                </CreateBroadcastButton>
+                                {cantCreateStream == false && (
+                                    <CreateBroadcastButton type="submit" disabled={isLoading}>
+                                        {isLoading && <SyncLoader color={'#fff'} loading={isLoading} size={5} />}
+                                        {!isLoading && 'Create broadcast'}
+                                    </CreateBroadcastButton>
+                                )}
+
                             </ModalForm>
                         )}
 
@@ -214,11 +219,11 @@ export function MACreateNewBroadcast() {
 
 
             <Container onClick={handleOpenCreateNewBroadcastModal}>
-            Create a new broadcast
+                Create a new broadcast
             </Container>
 
 
-            
+
         </>
 
     )
